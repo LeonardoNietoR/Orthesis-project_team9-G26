@@ -5,10 +5,65 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="stylesheet" href="style.css" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
       <script defer src="script.js"></script>
       <title>Proyecto orthesis</title>
    </head>
    <body>
-      <h1>Test título 1</h1>
+      <h1>Glory and Greatness</h1>
+      <table>
+         <tr>
+            <td>
+               <form onsubmit="crearEstudiante()">
+                  <div>
+                     <label for="estudianteId">Id</label>
+                     <input type="number" id="estudianteId" name />
+                  </div>
+                  <div>
+                     <label for="estudianteName">Name</label>
+                     <input
+                        type="text"
+                        name="estudianteName"
+                        id="estudianteName"
+                     />
+                  </div>
+                  <div>
+                     <label for="estudianteLastName">LastName</label>
+                     <input
+                        type="text"
+                        name="estudianteLastName"
+                        id="estudianteLastName"
+                     />
+                  </div>
+                  <div>
+                     <label for="estudianteAge">Age</label>
+                     <input
+                        type="number"
+                        name="estudianteAge"
+                        id="estudianteAge"
+                     />
+                  </div>
+                  <div>
+                     <input type="submit" value="crear estudiante" />
+                  </div>
+               </form>
+               <button>Editar Estudiante</button>
+            </td>
+            <td>
+               <table>
+                  <thead>
+                     <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>LastName</th>
+                        <th>Age</th>
+                     </tr>
+                  </thead>
+                  <tbody></tbody>
+               </table>
+            </td>
+         </tr>
+      </table>
+      <!-- <script type="text/javascript" src="script.js"></script> -->
    </body>
 </html>
