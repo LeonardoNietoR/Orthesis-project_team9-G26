@@ -7,10 +7,138 @@
       <link rel="stylesheet" href="style.css" />
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
       <script defer src="script.js"></script>
+      <script defer src="script2.js"></script>
       <title>Proyecto orthesis</title>
    </head>
    <body>
-      <h1>Glory and Greatness</h1>
+      <h1 id="uno">Glory and Greatness</h1>
+
+      <!-- Formularios -->
+
+      <section class="orthesis">
+         <div class="table table_orthesis">
+            <h2>Table orthesis</h2>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Id</th>
+                     <th>Name</th>
+                     <th>Brand</th>
+                     <th>Model</th>
+                     <th>Category_Id</th>
+                  </tr>
+               </thead>
+            </table>
+         </div>
+         <div class="form form_orthesis">
+            <h2>Create orthesis</h2>
+            <form action="">
+               <div>
+                  <label for="orthesis_id">Id Orthesis</label>
+                  <input type="number" id="orthesis_id" name="orthesis_id" />
+               </div>
+               <div>
+                  <label for="orthesis_name">Name</label>
+                  <input type="text" id="orthesis_name" name="orthesis_name" />
+               </div>
+               <div>
+                  <label for="orthesis_brand">Brand</label>
+                  <input
+                     type="text"
+                     id="orthesis_brand"
+                     name="orthesis_brand"
+                  />
+               </div>
+               <div>
+                  <label for="orthesis_model">Model</label>
+                  <input
+                     type="text"
+                     id="orthesis_model"
+                     name="orthesis_model"
+                  />
+               </div>
+               <div>
+                  <label for="orthesis_categoryId">Category id</label>
+                  <input
+                     type="text"
+                     id="orthesis_categoryId"
+                     name="orthesis_categoryId"
+                  />
+               </div>
+            </form>
+         </div>
+      </section>
+      <section class="client">
+         <div class="table table_client">
+            <h2>Table client</h2>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Id</th>
+                     <th>Name</th>
+                     <th>Age</th>
+                     <th>Email</th>
+                  </tr>
+               </thead>
+            </table>
+         </div>
+
+         <div class="form form_client">
+            <h2>Register client</h2>
+            <form action="">
+               <div>
+                  <label for="client_id">Id Client</label>
+                  <input type="number" id="client_id" name="client_id" />
+               </div>
+               <div>
+                  <label for="client_name">Name</label>
+                  <input type="number" id="client_name" name="client_name" />
+               </div>
+               <div>
+                  <label for="client_email">Email</label>
+                  <input type="number" id="client_email" name="client_email" />
+               </div>
+               <div>
+                  <label for="client_age">Age</label>
+                  <input type="number" id="client_age" name="client_age" />
+               </div>
+            </form>
+         </div>
+      </section>
+      <section class="message">
+         <div class="table table_message">
+            <h2>Table message</h2>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Id</th>
+                     <th>Message_text</th>
+                  </tr>
+               </thead>
+            </table>
+         </div>
+         <div class="form form_mensaje">
+            <h2>Register message</h2>
+            <form action="">
+               <div>
+                  <label for="message_id">Id Message</label>
+                  <input type="number" id="message_id" name="message_id" />
+               </div>
+               <div>
+                  <label for="message_messageText">Message Text</label>
+                  <input
+                     type="number"
+                     id="message_messageText"
+                     name="message_messageText"
+                  />
+               </div>
+            </form>
+         </div>
+         <br /><br />
+      </section>
+      <br /><br /><br /><br />
+
+      <!-- EJEMPLO TABLA ESTUDIANTES ------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
       <table>
          <tr>
             <td>
@@ -47,10 +175,10 @@
                      <input type="submit" value="crear estudiante" />
                   </div>
                </form>
-               <button>Editar Estudiante</button>
+               <button onClick="editarEstudiante()">Editar Estudiante</button>
             </td>
             <td>
-               <table>
+               <table id="listaEstudiantes">
                   <thead>
                      <tr>
                         <th>ID</th>

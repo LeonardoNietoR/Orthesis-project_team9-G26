@@ -1,3 +1,23 @@
+body {
+   background-color: #eee;
+}
 h1 {
    color: blue;
+}
+
+section {
+   width: 80%;
+   max-width: 70rem;
+   margin: 2rem auto;
+   border: 1px solid blue;
+   display: flex;
+}
+
+.table,
+.form {
+   border: 1px solid #999;
+}
+
+.table {
+   width: 60%;
 }
