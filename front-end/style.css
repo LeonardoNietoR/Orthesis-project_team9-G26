@@ -13,11 +13,43 @@ section {
    display: flex;
 }
 
+.container_table,
+.container_form {
+   border: 1px solid red;
+}
+
+.container_table {
+   width: 70%;
+}
+.container_form {
+   width: 30%;
+}
+
+.table {
+   min-width: 35rem;
+   height: 3rem;
+   border-collapse: collapse;
+   overflow: auto;
+}
+
 .table,
 .form {
    border: 1px solid #999;
 }
 
-.table {
-   width: 60%;
+.table thead tr {
+   background-color: rgb(190, 234, 237);
+   text-align: center;
+}
+
+.table th,
+.table td {
+   padding: 0.5rem 1rem;
+}
+
+.table tbody tr {
+   border: 1px solid #ccc;
+}
+.table tbody tr:nth-of-type(even) {
+   background-color: #f3f3f3;
 }

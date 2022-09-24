@@ -11,14 +11,14 @@
       <title>Proyecto orthesis</title>
    </head>
    <body>
-      <h1 id="uno">Glory and Greatness</h1>
+      <h1 id="uno">Orthesis App</h1>
 
       <!-- Formularios -->
 
       <section class="orthesis">
-         <div class="table table_orthesis">
+         <div class="container_table">
             <h2>Table orthesis</h2>
-            <table>
+            <table class="table table_orthesis">
                <thead>
                   <tr>
                      <th>Id</th>
@@ -28,11 +28,12 @@
                      <th>Category_Id</th>
                   </tr>
                </thead>
+               <tbody id="table_orthesis-tbody"></tbody>
             </table>
          </div>
-         <div class="form form_orthesis">
+         <div class="container_form">
             <h2>Create orthesis</h2>
-            <form action="">
+            <form action="" class="form form_orthesis">
                <div>
                   <label for="orthesis_id">Id Orthesis</label>
                   <input type="number" id="orthesis_id" name="orthesis_id" />
@@ -65,13 +66,17 @@
                      name="orthesis_categoryId"
                   />
                </div>
+               <button id="btnCreateOrthesis" type="submit">
+                  Create orthesis
+               </button>
+               <button id="btnEditOrthesis">Edit orthesis</button>
             </form>
          </div>
       </section>
       <section class="client">
-         <div class="table table_client">
+         <div class="container_table">
             <h2>Table client</h2>
-            <table>
+            <table class="table table_client">
                <thead>
                   <tr>
                      <th>Id</th>
@@ -83,9 +88,9 @@
             </table>
          </div>
 
-         <div class="form form_client">
+         <div class="container_form">
             <h2>Register client</h2>
-            <form action="">
+            <form action="" class="form form_client">
                <div>
                   <label for="client_id">Id Client</label>
                   <input type="number" id="client_id" name="client_id" />
@@ -106,9 +111,11 @@
          </div>
       </section>
       <section class="message">
-         <div class="table table_message">
+         }
+
+         <div class="container_table">
             <h2>Table message</h2>
-            <table>
+            <table class="table table_message">
                <thead>
                   <tr>
                      <th>Id</th>
@@ -117,9 +124,10 @@
                </thead>
             </table>
          </div>
-         <div class="form form_mensaje">
+
+         <div class="container_form">
             <h2>Register message</h2>
-            <form action="">
+            <form action="" class="form form_mensaje">
                <div>
                   <label for="message_id">Id Message</label>
                   <input type="number" id="message_id" name="message_id" />

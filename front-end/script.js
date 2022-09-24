@@ -79,6 +79,9 @@ function consultarEstudiantes() {
    const tabla = document
       .getElementById("listaEstudiantes")
       .getElementsByTagName("tbody")[0];
+
+   console.log("tabla: " + tabla);
+
    $.ajax({
       url: "https://g400927313eea0e-g7e55587xh9qd4mr.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/estudiantes/estudiantes",
       data: null,
@@ -87,6 +90,9 @@ function consultarEstudiantes() {
       success: function (data) {
          data.items.map((item) => {
             const nuevoEstudiante = tabla.insertRow();
+
+            console.log("nuevoEstu:" + nuevoEstudiante);
+
             nuevoEstudiante.insertCell(0).innerHTML = item.id;
             nuevoEstudiante.insertCell(1).innerHTML = item.nombre;
             nuevoEstudiante.insertCell(2).innerHTML = item.apellido;
