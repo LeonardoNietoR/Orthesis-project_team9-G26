@@ -14,89 +14,84 @@ const urlOrthesisRequest =
 
 // CRUD Orthesis ------------------------------------------------------
 
-async function crudOperationOrthesis(
-   method = "GET",
-   id = null,
-   eventTarget = null
-) {
-   if (method === "GET") {
-      const response = await fetch(urlOrthesisRequest);
-      const data = await response.json();
+async function readOrthesis() {
+   const response = await fetch(urlOrthesisRequest);
+   const data = await response.json();
 
-      fillTable(data.items);
-   }
+   llenarTablaOrthesis(data.items);
+}
 
-   if (method === "POST") {
-      const dataToSend = {
-         id: parseInt(inputOrthesisId.value),
-         name: inputOrthesisName.value,
-         brand: inputOrthesisBrand.value,
-         model: parseInt(inputOrthesisModel.value),
-         category_id: parseInt(inputOrthesisCategory.value),
-      };
-      try {
-         const response = await fetch(urlOrthesisRequest, {
-            method: method,
-            body: JSON.stringify(dataToSend),
-            headers: { "Content-type": "application/json" },
-         });
+async function createOrthesis() {
+   const dataToSend = {
+      id: parseInt(inputOrthesisId.value),
+      name: inputOrthesisName.value,
+      brand: inputOrthesisBrand.value,
+      model: parseInt(inputOrthesisModel.value),
+      category_id: parseInt(inputOrthesisCategory.value),
+   };
 
-         if (!response.ok) {
-            throw new Error("Error with post");
-         }
-
-         location.reload();
-      } catch (err) {
-         console.log(err);
-      }
-   }
-
-   if (method === "PUT") {
-      const currentRow = eventTarget.parentElement.parentElement;
-      // makes each cell of the row editable
-      Array.from(currentRow.children).forEach((elem) => {
-         elem.setAttribute("contenteditable", "");
+   try {
+      const response = await fetch(urlOrthesisRequest, {
+         method: "POST",
+         body: JSON.stringify(dataToSend),
+         headers: { "Content-type": "application/json" },
       });
 
-      try {
-         const response = await fetch(urlOrthesisRequest, {
-            method: method,
-            body: JSON.stringify(dataToSend),
-            headers: { "Content-type": "application/json" },
-         });
-
-         if (!response.ok) {
-            throw new Error("Error with put...");
-         }
-         console.log("Successful PUT");
-      } catch (err) {
-         console.log("ERRORRR" + err);
+      if (!response.ok) {
+         throw new Error("Error with post");
       }
+
+      location.reload();
+   } catch (err) {
+      console.log(err);
    }
+}
+async function updateOrthesis(filaEditada) {
+   const dataToSend = {
+      id: parseInt(filaEditada[0].innerText),
+      name: filaEditada[1].innerText,
+      brand: filaEditada[2].innerText,
+      model: parseInt(filaEditada[3].innerText),
+      category_id: parseInt(filaEditada[4].innerText),
+   };
 
-   if (method === "DELETE") {
-      console.log("clicked delete");
+   try {
+      const response = await fetch(urlOrthesisRequest, {
+         method: "PUT",
+         body: JSON.stringify(dataToSend),
+         headers: { "Content-type": "application/json" },
+      });
 
-      try {
-         const response = await fetch(`${urlOrthesisRequest}/${id}`, {
-            method: method,
-            body: null,
-         });
-
-         if (!response.ok) {
-            throw new Error("Error with delete...");
-         }
-
-         location.reload();
-      } catch (err) {
-         console.log("ERRORRR" + err);
+      if (!response.ok) {
+         throw new Error("Error with put...");
       }
+
+      location.reload();
+   } catch (err) {
+      console.log("ERRORRR" + err);
    }
 }
 
-crudOperationOrthesis();
+async function deleteOrthesis(id) {
+   try {
+      const response = await fetch(`${urlOrthesisRequest}/${id}`, {
+         method: "DELETE",
+         body: null,
+      });
 
-const fillTable = (data) => {
+      if (!response.ok) {
+         throw new Error("Error with delete...");
+      }
+
+      location.reload();
+   } catch (err) {
+      console.log("ERRORRR:" + err);
+   }
+}
+
+readOrthesis();
+
+const llenarTablaOrthesis = (data) => {
    data.forEach((item) => {
       const newOrthesis = tbodyTablaOrthesis.insertRow();
 
@@ -107,14 +102,38 @@ const fillTable = (data) => {
       newOrthesis.insertCell([4]).innerHTML = item.category_id;
       newOrthesis.insertCell([
          5,
-      ]).innerHTML = `<button onClick="crudOperationOrthesis('PUT', null, this)">Edit</button>
-      <button onClick="crudOperationOrthesis('DELETE' , ${item.id})">Delete</button> 
-      
-      `;
+      ]).innerHTML = `<button onClick="habilitarEdicionTabla(this)">Edit</button>`;
+      newOrthesis.insertCell([
+         6,
+      ]).innerHTML = `<button onClick="deleteOrthesis(${item.id})">Delete</button> `;
+   });
+};
+
+const habilitarEdicionTabla = (eventTarget) => {
+   const tdContenedorEditBtn = eventTarget.parentElement;
+   const filaAEditar = eventTarget.parentElement.parentElement;
+   const arrayFilaAEditar = Array.from(filaAEditar.children);
+
+   arrayFilaAEditar.forEach((elem, index) => {
+      // makes each cell of the row editable (except for id)
+      if (index !== 0 && index !== 5) elem.setAttribute("contenteditable", "");
+      if (index === 1) elem.focus();
+   });
+
+   crearBtnGuardar(tdContenedorEditBtn);
+};
+
+const crearBtnGuardar = (contenedorBtn) => {
+   const btnGuardar = document.createElement("button");
+   btnGuardar.textContent = "Guardar";
+   contenedorBtn.innerHTML = "";
+   contenedorBtn.prepend(btnGuardar);
+   btnGuardar.addEventListener("click", () => {
+      updateOrthesis(Array.from(contenedorBtn.parentElement.cells));
    });
 };
 
 btnCreateOrthesis.addEventListener("click", (event) => {
    event.preventDefault();
-   crudOperationOrthesis("POST");
+   createOrthesis();
 });
