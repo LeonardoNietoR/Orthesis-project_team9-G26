@@ -2,7 +2,6 @@
 
 const tbodyTablaOrthesis = document.getElementById("table_orthesis-tbody");
 const btnCreateOrthesis = document.getElementById("btnCreateOrthesis");
-const btnEditOrthesis = document.getElementById("btnEditOrthesis");
 const inputOrthesisId = document.getElementById("orthesis_id");
 const inputOrthesisName = document.getElementById("orthesis_name");
 const inputOrthesisBrand = document.getElementById("orthesis_brand");
@@ -46,6 +45,7 @@ async function createOrthesis() {
       console.log(err);
    }
 }
+
 async function updateOrthesis(filaEditada) {
    const dataToSend = {
       id: parseInt(filaEditada[0].innerText),
@@ -116,7 +116,12 @@ const habilitarEdicionTabla = (eventTarget) => {
 
    arrayFilaAEditar.forEach((elem, index) => {
       // makes each cell of the row editable (except for id)
-      if (index !== 0 && index !== 5) elem.setAttribute("contenteditable", "");
+      if (
+         index !== 0 &&
+         index !== arrayFilaAEditar.length - 1 &&
+         index !== arrayFilaAEditar.length - 2
+      )
+         elem.setAttribute("contenteditable", "");
       if (index === 1) elem.focus();
    });
 
@@ -125,7 +130,7 @@ const habilitarEdicionTabla = (eventTarget) => {
 
 const crearBtnGuardar = (contenedorBtn) => {
    const btnGuardar = document.createElement("button");
-   btnGuardar.textContent = "Guardar";
+   btnGuardar.textContent = "Save";
    contenedorBtn.innerHTML = "";
    contenedorBtn.prepend(btnGuardar);
    btnGuardar.addEventListener("click", () => {
