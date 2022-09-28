@@ -6,7 +6,7 @@ const inputMessageText = document.getElementById("message_messageText");
 const urlMessageRequest =
    "https://g400927313eea0e-g7e55587xh9qd4mr.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/message/message";
 
-// CRUD Client ------------------------------------------------------
+// CRUD Message ------------------------------------------------------
 
 async function readMessage() {
    const response = await fetch(urlMessageRequest);
@@ -106,7 +106,6 @@ const habilitarEdicionTablaMessage = (eventTarget) => {
    const arrayFilaAEditar = Array.from(filaAEditar.children);
 
    arrayFilaAEditar.forEach((elem, index) => {
-      // makes each cell of the row editable (except for id)
       if (
          index !== 0 &&
          index !== arrayFilaAEditar.length - 1 &&

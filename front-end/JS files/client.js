@@ -10,7 +10,7 @@ const urlClientRequest =
 
 // CRUD Client ------------------------------------------------------
 
-async function readMessage() {
+async function readClient() {
    const response = await fetch(urlClientRequest);
    const data = await response.json();
 
@@ -84,7 +84,7 @@ async function deleteClient(id) {
    }
 }
 
-readMessage();
+readClient();
 
 const llenarTablaClient = (data) => {
    data.forEach((item) => {
@@ -109,7 +109,6 @@ const habilitarEdicionTablaClient = (eventTarget) => {
    const arrayFilaAEditar = Array.from(filaAEditar.children);
 
    arrayFilaAEditar.forEach((elem, index) => {
-      // makes each cell of the row editable (except for id)
       if (
          index !== 0 &&
          index !== arrayFilaAEditar.length - 1 &&
