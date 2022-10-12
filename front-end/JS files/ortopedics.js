@@ -11,6 +11,8 @@ const inputOrthesisDescription = document.getElementById(
    "orthesis_description"
 );
 
+const ulOrtopedicsList = document.getElementById("ortopedic_list");
+
 // const urlOrthesisRequest =
 //    "https://g400927313eea0e-g7e55587xh9qd4mr.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/orthesis/orthesis";
 
@@ -19,25 +21,32 @@ const urlOrthesisRequest = "http://localhost:8080/api";
 // CRUD Orthesis ------------------------------------------------------
 
 async function readOrthesis() {
-   const response = await fetch(`${urlOrthesisRequest}/Ortopedic/all`);
-   const data = await response.json();
-   console.log(data.items);
+   try {
+      const response = await fetch(`${urlOrthesisRequest}/Ortopedic/all`);
+      const data = await response.json();
+      console.log(data);
 
-   llenarTablaOrthesis(data.items);
+      llenarListaOrtopedics(data);
+      llenarTablaOrthesis(data);
+   } catch (err) {
+      console.log(err);
+   }
 }
 
 async function createOrthesis() {
    const dataToSend = {
-      id: parseInt(inputOrthesisId.value),
       name: inputOrthesisName.value,
       brand: inputOrthesisBrand.value,
       year: parseInt(inputOrthesisYear.value),
       description: inputOrthesisDescription.value,
-      category_id: parseInt(inputOrthesisCategory.value),
+      // category_id: parseInt(inputOrthesisCategory.value),
+      // user must create at least one category first, before creating an ortopedic. User must select the category from a dropdown menu with the name, and here we get the id of that name, which is send as {id:#}
+      category: { id: 1 },
    };
 
    try {
-      const response = await fetch(urlOrthesisRequest, {
+      console.log(dataToSend);
+      const response = await fetch(`${urlOrthesisRequest}/Ortopedic/save`, {
          method: "POST",
          body: JSON.stringify(dataToSend),
          headers: { "Content-type": "application/json" },
@@ -63,7 +72,7 @@ async function updateOrthesis(filaEditada) {
    };
 
    try {
-      const response = await fetch(urlOrthesisRequest, {
+      const response = await fetch(`${urlOrthesisRequest}/Ortopedic/update`, {
          method: "PUT",
          body: JSON.stringify(dataToSend),
          headers: { "Content-type": "application/json" },
@@ -81,7 +90,7 @@ async function updateOrthesis(filaEditada) {
 
 async function deleteOrthesis(id) {
    try {
-      const response = await fetch(`${urlOrthesisRequest}/${id}`, {
+      const response = await fetch(`${urlOrthesisRequest}/Ortopedic/${id}`, {
          method: "DELETE",
          body: null,
       });
@@ -97,6 +106,15 @@ async function deleteOrthesis(id) {
 }
 
 readOrthesis();
+
+const llenarListaOrtopedics = (data) => {
+   if (data) {
+      data.forEach((item) => {
+         const newListElement = `<li><a href="#">${item.name}</a></li>`;
+         ulOrtopedicsList.insertAdjacentHTML("beforeend", newListElement);
+      });
+   }
+};
 
 const llenarTablaOrthesis = (data) => {
    if (data) {

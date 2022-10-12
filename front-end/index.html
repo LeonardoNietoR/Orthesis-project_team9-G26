@@ -7,16 +7,72 @@
 
       <link rel="stylesheet" href="style.css" />
 
-      // Esto es prueba //
-
       <title>Proyecto orthesis</title>
    </head>
    <body>
       <h1 id="uno">Orthesis App</h1>
       <!-- Orthesis section ------------------------------------ -->
+      <!-- Ortopedics list and form ------------------------------------ -->
+
+      <section class="ortopedics">
+         <div class="container_ortopedic-list">
+            <h2>Ortopedics</h2>
+            <ul id="ortopedic_list"></ul>
+         </div>
+         <div class="container_form container_form-ortopedic">
+            <h2>Create ortopedic</h2>
+            <form action="" class="form form_orthesis">
+               <!-- <div>
+                  <label for="orthesis_id">Id Ortopedic:</label>
+                  <input type="number" id="orthesis_id" name="orthesis_id" />
+               </div> -->
+               <div>
+                  <label for="orthesis_name">Name:</label>
+                  <input type="text" id="orthesis_name" name="orthesis_name" />
+               </div>
+               <div>
+                  <label for="orthesis_brand">Brand:</label>
+                  <input
+                     type="text"
+                     id="orthesis_brand"
+                     name="orthesis_brand"
+                  />
+               </div>
+               <div>
+                  <label for="orthesis_year">Year:</label>
+                  <input
+                     type="number"
+                     maxlength="4"
+                     id="orthesis_year"
+                     name="orthesis_year"
+                  />
+               </div>
+               <div>
+                  <label for="orthesis_description">Description:</label>
+                  <textarea
+                     name="orthesis_description"
+                     id="orthesis_description"
+                     cols="30"
+                     rows="3"
+                  ></textarea>
+               </div>
+               <div>
+                  <label for="orthesis_categoryId">Id Category:</label>
+                  <input
+                     type="number"
+                     id="orthesis_categoryId"
+                     name="orthesis_categoryId"
+                  />
+               </div>
+               <button id="btnCreateOrthesis" type="submit">
+                  Create ortopedic
+               </button>
+            </form>
+         </div>
+      </section>
       <section class="orthesis">
          <div class="container_table">
-            <h2>Orthesis</h2>
+            <h2>Ortopedic</h2>
             <table class="table table_orthesis">
                <thead>
                   <tr>
@@ -30,56 +86,6 @@
                </thead>
                <tbody id="table_orthesis-tbody"></tbody>
             </table>
-         </div>
-         <div class="container_form">
-            <h2>Create orthesis</h2>
-            <form action="" class="form form_orthesis">
-               <div>
-                  <label for="orthesis_id">Id Orthesis</label>
-                  <input type="number" id="orthesis_id" name="orthesis_id" />
-               </div>
-               <div>
-                  <label for="orthesis_name">Name</label>
-                  <input type="text" id="orthesis_name" name="orthesis_name" />
-               </div>
-               <div>
-                  <label for="orthesis_brand">Brand</label>
-                  <input
-                     type="text"
-                     id="orthesis_brand"
-                     name="orthesis_brand"
-                  />
-               </div>
-               <div>
-                  <label for="orthesis_year">Year</label>
-                  <input
-                     type="number"
-                     maxlength="4"
-                     id="orthesis_year"
-                     name="orthesis_year"
-                  />
-               </div>
-               <div>
-                  <label for="orthesis_description">Description</label>
-                  <textarea
-                     name="orthesis_description"
-                     id="orthesis_description"
-                     cols="30"
-                     rows="3"
-                  ></textarea>
-               </div>
-               <div>
-                  <label for="orthesis_categoryId">Category id</label>
-                  <input
-                     type="number"
-                     id="orthesis_categoryId"
-                     name="orthesis_categoryId"
-                  />
-               </div>
-               <button id="btnCreateOrthesis" type="submit">
-                  Create orthesis
-               </button>
-            </form>
          </div>
       </section>
       <!-- Client section---------------------------------------------------- -->
@@ -163,12 +169,8 @@
          </div>
          <br /><br />
       </section>
-      <section>
-         <p>test</p>
-      </section>
-      <br /><br />
 
-      <script type="text/javascript" src="JS files/orthesis.js"></script>
+      <script type="text/javascript" src="JS files/ortopedics.js"></script>
       <script type="text/javascript" src="JS files/client.js"></script>
       <script type="text/javascript" src="JS files/message.js"></script>
    </body>

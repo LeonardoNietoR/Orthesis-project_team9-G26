@@ -1,14 +1,21 @@
+html {
+   font-size: 62.5%;
+}
+
 body {
+   box-sizing: border-box;
    background-color: #eee;
    font-family: Arial, Helvetica, sans-serif;
+   font-size: 1.6rem;
 }
 h1 {
    color: blue;
+   font-size: 3rem;
 }
 
 section {
    width: 80%;
-   max-width: 60rem;
+   max-width: 70rem;
    margin: 2rem auto;
    border: 2px solid #999;
    display: flex;
@@ -16,7 +23,7 @@ section {
 
 .container_table,
 .container_form {
-   height: 17rem;
+   /* height: 17rem; */
    padding: 1rem 1rem;
    display: flex;
    flex-direction: column;
@@ -29,21 +36,13 @@ section {
    width: 70%;
    border-right: 1px solid #999;
 }
-.container_form {
-   width: 30%;
-}
 
 .table {
    min-width: 35rem;
    height: 5rem;
    border-collapse: collapse;
    overflow: auto;
-}
-
-.table,
-.form {
    border: 1px solid #999;
-   padding: 1rem 0.3rem;
 }
 
 .table thead tr {
@@ -70,9 +69,94 @@ section {
 }
 
 .form div {
-   margin-bottom: 0.5rem;
+   margin-bottom: 0.6rem;
 }
 
-button[type="submit"] {
+button {
+   font-size: 1.4rem;
    padding: 0.4rem 1.3rem;
+   border: 1px solid #333;
+   border-radius: 5px;
+}
+
+button:active {
+   /* background-color: red; */
+   font-size: 1.3rem;
+}
+
+button:focus {
+   cursor: pointer;
+}
+
+/* SECTION ORTOPEDIC  ################################################################################################################################################################################/
+
+/* Ortopedic list ******************************************** */
+.container_ortopedic-list {
+   width: 55%;
+   /* background-color: aquamarine; */
+}
+
+.container_ortopedic-list h2 {
+   text-align: center;
+}
+#ortopedic_list {
+   width: 80%;
+   height: 25rem;
+   margin: 0 auto;
+   /* background-color: aquamarine; */
+   padding-inline-start: 0;
+   overflow-y: auto;
+}
+
+#ortopedic_list li {
+   width: 100%;
+   /* background-color: yellowgreen; */
+   list-style-type: none;
+   padding: 0.3rem 0;
+   border-bottom: 1px solid #999;
+}
+
+#ortopedic_list li a {
+   /* background-color: red; */
+   display: block;
+   text-align: center;
+}
+
+/* Ortopedic form ******************************************* */
+
+.container_form-ortopedic {
+   width: 45%;
+   border-left: 1px solid #999;
+}
+
+.form_orthesis {
+   width: 28rem;
+   height: 23rem;
+   padding: 1rem 1rem;
+}
+
+.form_orthesis div {
+   width: 100%;
+   height: auto;
+   display: flex;
+   justify-content: space-between;
+}
+
+.form_orthesis label {
+   display: inline-block;
+   width: 35%;
+   height: auto;
+   text-align: right;
+}
+.form_orthesis input,
+.form_orthesis textarea {
+   display: inline-block;
+   width: 60%;
+}
+
+#btnCreateOrthesis {
+   margin: 1rem auto;
+   display: block;
+   background-color: rgb(17, 128, 45);
+   color: #fff;
 }
