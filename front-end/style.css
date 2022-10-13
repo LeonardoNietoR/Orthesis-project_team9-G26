@@ -7,6 +7,7 @@ body {
    background-color: #eee;
    font-family: Arial, Helvetica, sans-serif;
    font-size: 1.6rem;
+   position: relative;
 }
 h1 {
    color: blue;
@@ -159,4 +160,19 @@ button:focus {
    display: block;
    background-color: rgb(17, 128, 45);
    color: #fff;
+}
+
+/* Ortopedic details pop-up ******************************************* */
+
+.container_details-ortopedic {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   background-color: rgba(0, 0, 0, 0.729);
+}
+
+.hide {
+   display: none;
 }
