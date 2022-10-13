@@ -8,4 +8,5 @@ import com.example.orthesisproject.entidades.Ortopedic;
 @Repository
 public interface OrtopedicRepository extends JpaRepository<Ortopedic,Integer>  {
    
+
 }

@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-// import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -25,14 +24,16 @@ public class Ortopedic implements Serializable{
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Integer id;
 
+   @Column(name="name")
+   private String name;
    @Column(name="brand")
    private String brand;
    @Column(name="year")
    private Integer year;
-   @Column(name="name")
-   private String name;
    @Column(name="description")
    private String description;   
+   
+
 
    @ManyToOne
    @JoinColumn(name="categoryId")
@@ -40,12 +41,13 @@ public class Ortopedic implements Serializable{
    private Category category;
 
    @OneToMany(cascade ={CascadeType.PERSIST}, mappedBy = "ortopedic")  
-   @JsonIgnoreProperties("ortopedic")
+   @JsonIgnoreProperties({"ortopedic","client"})
    private List<Message> messages;
 
    @OneToMany
    @JsonIgnoreProperties("ortopedic")
    private List<Reservation> reservations;
+
 
    public Ortopedic(){}
 
@@ -112,9 +114,5 @@ public class Ortopedic implements Serializable{
    public void setReservations(List<Reservation> reservations) {
       this.reservations = reservations;
    }
-
-
-  
-
 
 }

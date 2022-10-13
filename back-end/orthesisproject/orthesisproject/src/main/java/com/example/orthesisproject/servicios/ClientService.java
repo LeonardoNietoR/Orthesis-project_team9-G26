@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.orthesisproject.entidades.Client;
-import com.example.orthesisproject.repositorios.OrtipedicRepository;
+import com.example.orthesisproject.repositorios.ClientRepository;
 
 @Service
 public class ClientService {
@@ -14,9 +14,9 @@ public class ClientService {
 
    //@ Autowired creates an object of "clientRepository" with access to all the functionalities. Since it is an interface, its not possible to do "= new ClientRepository".
 @Autowired
-private OrtipedicRepository clientRepository;
+private ClientRepository clientRepository;
 
-public ClientService(OrtipedicRepository clientRepository) {
+public ClientService(ClientRepository clientRepository) {
    this.clientRepository = clientRepository;
 }
 
