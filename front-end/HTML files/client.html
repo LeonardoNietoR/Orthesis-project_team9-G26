@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="../CSS files/client.css" />
+      <title>Client</title>
+   </head>
+   <body>
+      <!-- CLIENT SECTION  ************************************************************************************************************* -->
+      <section class="client">
+         <div class="container_table">
+            <h2>Clients</h2>
+            <table class="table table_client">
+               <thead>
+                  <tr>
+                     <th>Id</th>
+                     <th>Name</th>
+                     <th>Age</th>
+                     <th>Email</th>
+                  </tr>
+               </thead>
+               <tbody id="table_client-tbody"></tbody>
+            </table>
+         </div>
+
+         <div class="container_form">
+            <h2>Register client</h2>
+            <form action="" class="form form_client">
+               <div>
+                  <label for="client_id">Id Client</label>
+                  <input type="number" id="client_id" name="client_id" />
+               </div>
+               <div>
+                  <label for="client_name">Name</label>
+                  <input type="text" id="client_name" name="client_name" />
+               </div>
+               <div>
+                  <label for="client_email">Email</label>
+                  <input type="email" id="client_email" name="client_email" />
+               </div>
+               <div>
+                  <label for="client_age">Age</label>
+                  <input type="number" id="client_age" name="client_age" />
+               </div>
+               <button id="btnRegisterClient" type="submit">
+                  Register client
+               </button>
+            </form>
+         </div>
+      </section>
+
+      <script type="text/javascript" src="../JS files/client.js"></script>
+   </body>
+</html>
