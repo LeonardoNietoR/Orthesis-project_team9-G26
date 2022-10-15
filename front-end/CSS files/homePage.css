@@ -31,107 +31,50 @@ h1 {
    text-align: center;
 }
 
+/* ORTOPEDIC SECTION  ################################################################################################################################################################################*/
+
 section {
-   width: 80%;
-   max-width: 70rem;
-   margin: 2rem auto;
-   border: 2px solid #999;
-   display: flex;
-}
-
-.container_table,
-.container_form {
-   /* height: 17rem; */
-   padding: 1rem 1rem;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   overflow: hidden;
-}
-
-.container_table {
-   width: 70%;
-   border-right: 1px solid #999;
-}
-
-.table {
-   min-width: 35rem;
-   height: 5rem;
-   border-collapse: collapse;
-   overflow: auto;
-   border: 1px solid #999;
-}
-
-.table thead tr {
-   background-color: rgb(190, 234, 237);
-   text-align: center;
-}
-
-.table th,
-.table td {
-   padding: 0.5rem 1rem;
-}
-
-.table td:last-of-type,
-.table td:nth-last-of-type(2) {
-   width: 3.4rem;
-   padding: 0 0;
-}
-
-.table tbody tr {
+   min-width: 85rem;
+   max-width: 105rem;
+   height: 55rem;
+   margin: 3rem auto;
+   padding: 2rem;
+   display: grid;
+   grid-template-columns: 20% 50% 30%;
+   grid-template-rows: 65% 35%;
    border: 1px solid #ccc;
 }
-.table tbody tr:nth-of-type(even) {
-   background-color: #f3f3f3;
-}
-
-.form div {
-   margin-bottom: 0.6rem;
-}
-
-button {
-   font-size: 1.4rem;
-   padding: 0.4rem 1.3rem;
-   border: 1px solid #333;
-   border-radius: 5px;
-}
-
-button:active {
-   /* background-color: red; */
-   font-size: 1.3rem;
-}
-
-button:focus {
-   cursor: pointer;
-}
-
-/* SECTION ORTOPEDIC  ################################################################################################################################################################################/
 
 /* Ortopedic list ******************************************** */
 .container_ortopedic-list {
-   width: 55%;
+   height: 33rem;
+   border: 1px solid #999;
+   margin-right: 2rem;
    /* background-color: aquamarine; */
 }
 
 .container_ortopedic-list h2 {
    text-align: center;
+   margin-bottom: 1rem;
+   padding: 1rem 2rem;
+   background-color: rgb(252, 223, 170);
 }
 #ortopedic_list {
-   width: 80%;
+   width: 90%;
    height: 25rem;
    margin: 0 auto;
-   /* background-color: aquamarine; */
+   border: 1px solid #bbb;
+   /* background-color: #fff; */
    padding-inline-start: 0;
    overflow-y: auto;
 }
 
 #ortopedic_list li {
    width: 100%;
-   /* background-color: yellowgreen; */
+   background-color: #fff;
    list-style-type: none;
-   padding: 0.3rem 0;
-   border-bottom: 1px solid #999;
+   padding: 0.5rem 0;
+   border-bottom: 1px solid #bbb;
 }
 
 #ortopedic_list li a {
@@ -143,20 +86,30 @@ button:focus {
 /* Ortopedic form ******************************************* */
 
 .container_form-ortopedic {
-   width: 45%;
-   border-left: 1px solid #999;
+   height: 33rem;
+   border: 1px solid #999;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   overflow: hidden;
+}
+
+.container_form-ortopedic h2 {
+   margin: 1rem;
 }
 
 .form_orthesis {
    width: 28rem;
-   height: 23rem;
    padding: 1rem 1rem;
+   /* background-color: red; */
 }
 
 .form_orthesis div {
    width: 100%;
    height: auto;
    display: flex;
+   margin-bottom: 0.6rem;
    justify-content: space-between;
 }
 
@@ -172,24 +125,149 @@ button:focus {
    width: 60%;
 }
 
+button {
+   font-size: 1.4rem;
+   padding: 0.4rem 1.3rem;
+   border: 1px solid #333;
+   border-radius: 5px;
+}
+
+button:active {
+   font-size: 1.3rem;
+}
+
+button:focus {
+   cursor: pointer;
+}
+
 #btnCreateOrthesis {
-   margin: 1rem auto;
+   margin: 3rem auto;
    display: block;
    background-color: rgb(17, 128, 45);
    color: #fff;
 }
 
-/* Ortopedic details pop-up ******************************************* */
+/* Ortopedic details  ******************************************* */
 
-.container_details-ortopedic {
-   position: fixed;
-   top: 0;
-   left: 0;
-   width: 100vw;
-   height: 100vh;
-   background-color: rgba(0, 0, 0, 0.729);
+.container_details {
+   grid-column: 2/4;
+
+   /* background-color: rgb(254, 253, 253); */
+   border: 1px solid #999;
+   /* display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   align-items: center; */
+}
+
+.container_header-details {
+   width: 100%;
+   height: 30%;
+   /* background-color: rgb(249, 203, 157); */
+   background-color: rgb(243, 235, 129);
+   position: relative;
+}
+
+.container_details h2 {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+#title_name-detail {
+   font-style: italic;
+}
+
+.container_content-details {
+   height: 70%;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   align-items: center;
+}
+
+.table_details {
+   width: 80rem;
+   height: 6rem;
+   border-collapse: collapse;
+
+   overflow: auto;
+}
+
+.table_details thead tr {
+   background-color: rgb(202, 202, 202);
+   text-align: center;
+}
+
+.table_details th,
+.table_details td {
+   padding: 0.5rem 1rem;
+   border: 1px solid #999;
+}
+
+.table_details td {
+   background-color: #fff;
+   text-align: center;
+}
+
+/* .table_details td:last-of-type, */
+/* .table_details td:nth-last-of-type(2) {
+   width: 20%;
+   padding: 0 0;
+   background-color: red;
+} */
+
+/* .table_details tbody tr {
+   border: 1px solid #ccc;
+} */
+
+.container_buttons-details {
+   width: 26rem;
+   /* background-color: aquamarine; */
+   display: flex;
+   justify-content: space-between;
+}
+
+.container_buttons-details button {
+   width: 7rem;
 }
 
 .hide {
    display: none;
+}
+
+/* Menu  ******************************************* */
+
+.container_menu {
+   /* width: 20rem; */
+   height: 33rem;
+   /* background-color: #ccc; */
+   /* border: 1px solid #ccc; */
+}
+
+.container_menu li {
+   list-style-type: none;
+}
+.container_menu li div {
+   margin-bottom: 2rem;
+   height: 4rem;
+   width: 15rem;
+   background-color: #bbb;
+   position: relative;
+   border-radius: 8px;
+   cursor: pointer;
+}
+
+.container_menu li div:active {
+   transform: scale(95%);
+}
+
+.container_menu li a {
+   text-decoration: none;
+   color: #000;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
 }

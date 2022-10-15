@@ -18,6 +18,31 @@
       <!-- Ortopedics list and form ------------------------------------ -->
 
       <section class="ortopedics">
+         <div class="container_menu">
+            <ul>
+               <li>
+                  <div>
+                     <a href="HTML files/category.html">Categories</a>
+                     <!-- <a href="#">Categories</a> -->
+                  </div>
+               </li>
+               <li>
+                  <div>
+                     <a href="HTML files/client.html">Clients</a>
+                  </div>
+               </li>
+               <li>
+                  <div>
+                     <a href="HTML files/reservation.html">Reservations</a>
+                  </div>
+               </li>
+               <li>
+                  <div>
+                     <a href="HTML files/messages.html">Messages</a>
+                  </div>
+               </li>
+            </ul>
+         </div>
          <div class="container_ortopedic-list">
             <h2>Ortopedics</h2>
             <ul id="ortopedic_list"></ul>
@@ -72,31 +97,44 @@
                </button>
             </form>
          </div>
-      </section>
 
-      <div class="container_details-ortopedic hide">
-         <div class="container_table container_table-details-ortopedic">
-            <h2>Ortopedic</h2>
-            <table class="table table_orthesis">
-               <thead>
-                  <tr>
-                     <th>Id</th>
-                     <th>Name</th>
-                     <th>Brand</th>
-                     <th>Year</th>
-                     <th>Description</th>
-                     <th>Category_Id</th>
-                  </tr>
-               </thead>
-               <tbody id="table_orthesis-tbody"></tbody>
-            </table>
-            <div>
-               <button id="btnEditOrtopedic" type="button">Edit</button>
-               <button id="btnDeleteOrtopedic" type="button">Delete</button>
-               <button id="btnCancelOrtopedic" type="button">Cancel</button>
+         <div class="container_details hide">
+            <div class="container_header-details">
+               <h2>Details of <span id="title_name-detail"></span></h2>
+            </div>
+            <div class="container_content-details">
+               <table class="table_details">
+                  <thead>
+                     <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Brand</th>
+                        <th>Year</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr id="table_details-row">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                     </tr>
+                  </tbody>
+               </table>
+               <div class="container_buttons-details">
+                  <button id="btnEditOrtopedic" type="button" data-type="edit">
+                     Edit
+                  </button>
+                  <button id="btnDeleteOrtopedic" type="button">Delete</button>
+                  <button id="btnCancelOrtopedic" type="button">Cancel</button>
+               </div>
             </div>
          </div>
-      </div>
+      </section>
 
       <script type="text/javascript" src="JS files/ortopedics.js"></script>
    </body>
