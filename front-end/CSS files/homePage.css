@@ -151,13 +151,7 @@ button:focus {
 
 .container_details {
    grid-column: 2/4;
-
-   /* background-color: rgb(254, 253, 253); */
    border: 1px solid #999;
-   /* display: flex;
-   flex-direction: column;
-   justify-content: space-evenly;
-   align-items: center; */
 }
 
 .container_header-details {
@@ -188,7 +182,7 @@ button:focus {
 }
 
 .table_details {
-   width: 80rem;
+   width: 95%;
    height: 6rem;
    border-collapse: collapse;
 
@@ -210,17 +204,6 @@ button:focus {
    background-color: #fff;
    text-align: center;
 }
-
-/* .table_details td:last-of-type, */
-/* .table_details td:nth-last-of-type(2) {
-   width: 20%;
-   padding: 0 0;
-   background-color: red;
-} */
-
-/* .table_details tbody tr {
-   border: 1px solid #ccc;
-} */
 
 .container_buttons-details {
    width: 26rem;

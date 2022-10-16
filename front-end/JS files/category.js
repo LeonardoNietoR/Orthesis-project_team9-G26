@@ -1,7 +1,7 @@
 const btnCreateCategory = document.getElementById("btnCreate");
 const btnEditCategory = document.getElementById("btnEditCategory");
 const btnDeleteCategory = document.getElementById("btnDeleteCategory");
-const tableContentRow = document.getElementById("table_content-row");
+const tableBody = document.getElementById("table_body");
 const inputCategoryName = document.getElementById("category_name");
 const inputCategoryDescription = document.getElementById(
    "category_description"
@@ -17,7 +17,7 @@ async function readCategory() {
       const data = await response.json();
       console.log(data);
 
-      // sessionStorage.setItem("dataCateg", JSON.stringify(data));
+      sessionStorage.setItem("dataCategory", JSON.stringify(data));
 
       llenarTablaCategory(data);
    } catch (err) {
@@ -26,6 +26,9 @@ async function readCategory() {
 }
 
 async function createCategory() {
+   console.log(inputCategoryName.value);
+   console.log(inputCategoryDescription.value);
+
    if (
       inputCategoryName.value !== "" &&
       inputCategoryDescription.value !== ""
@@ -36,7 +39,7 @@ async function createCategory() {
       };
 
       try {
-         const response = await fetch(`${urlOrthesisRequest}/Ortopedic/save`, {
+         const response = await fetch(`${urlCategoryRequest}/Category/save`, {
             method: "POST",
             body: JSON.stringify(dataToSend),
             headers: { "Content-type": "application/json" },
@@ -66,7 +69,7 @@ async function updateCategory(filaEditada) {
    console.log(dataToSend);
 
    try {
-      const response = await fetch(`${urlOrthesisRequest}/Ortopedic/update`, {
+      const response = await fetch(`${urlOrthesisRequest}/Category/update`, {
          method: "PUT",
          body: JSON.stringify(dataToSend),
          headers: { "Content-type": "application/json" },
@@ -86,7 +89,7 @@ async function deleteCategory() {
    const id = rowWithDetails.firstElementChild.innerText;
 
    try {
-      const response = await fetch(`${urlOrthesisRequest}/Ortopedic/${id}`, {
+      const response = await fetch(`${urlOrthesisRequest}/Category/${id}`, {
          method: "DELETE",
          body: null,
       });
@@ -105,9 +108,60 @@ readCategory();
 
 const llenarTablaCategory = (data) => {
    if (data) {
-      tableContentRow.
+      data.forEach((item) => {
+         const newRow = `
+          <tr class="tr_table" data-idCategory=${item.id} >
+            <td>${item.name}</td>
+            <td>ortesisname</td>
+            <td>${item.description}</td>
+          </tr>
+         `;
 
-// nuevoEstudiante.insertCell(0).innerHTML = item.id;
-
+         tableBody.insertAdjacentHTML("beforeend", newRow);
+      });
    }
 };
+
+const selectRow = () => {};
+
+// Event listeners **************************************************
+
+btnCreateCategory.addEventListener("click", (event) => {
+   event.preventDefault();
+   createCategory();
+});
+
+const effectsOnRows = (event) => {
+   const rowSelected = event.target.closest(".tr_table");
+
+   if (event.type === "click") {
+      tableBody.removeEventListener("mouseover", effectsOnRows);
+      tableBody.removeEventListener("mouseout", effectsOnRows);
+
+      Array.from(tableBody.children).forEach((el) => {
+         el.style.color = "#000";
+         el.style.outline = "";
+         el.style["outline-offset"] = "";
+      });
+
+      rowSelected.style.color = "rgb(149,52,10)";
+      rowSelected.style.outline = "2px solid rgb(231, 78, 12)";
+      rowSelected.style["outline-offset"] = "-3px";
+
+      return;
+   }
+   if (event.type === "mouseover") {
+      rowSelected.style.outline = "2px solid rgb(231, 78, 12)";
+      rowSelected.style["outline-offset"] = "-3px";
+      return;
+   }
+   if (event.type === "mouseout") {
+      rowSelected.style.outline = "";
+      rowSelected.style["outline-offset"] = "";
+      return;
+   }
+};
+
+tableBody.addEventListener("click", effectsOnRows);
+tableBody.addEventListener("mouseover", effectsOnRows);
+tableBody.addEventListener("mouseout", effectsOnRows);

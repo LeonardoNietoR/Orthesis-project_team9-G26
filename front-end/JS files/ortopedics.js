@@ -17,9 +17,6 @@ const inputOrthesisDescription = document.getElementById(
 );
 const containerDetails = document.querySelector(".container_details");
 
-// // const urlOrthesisRequest =
-// //    "https://g400927313eea0e-g7e55587xh9qd4mr.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/orthesis/orthesis";
-
 const urlOrthesisRequest = "http://localhost:8080/api";
 
 // CRUD Ortopedic ------------------------------------------------------
@@ -29,8 +26,11 @@ async function readOrthesis() {
       const response = await fetch(`${urlOrthesisRequest}/Ortopedic/all`);
       const data = await response.json();
 
-      sessionStorage.setItem("dataOrt", JSON.stringify(data));
+      if (!response.ok) {
+         throw new Error("Error getting data");
+      }
 
+      sessionStorage.setItem("dataOrtesis", JSON.stringify(data));
       llenarListaOrtopedics(data);
    } catch (err) {
       console.log(err);

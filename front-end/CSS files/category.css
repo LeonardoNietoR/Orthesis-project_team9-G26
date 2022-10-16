@@ -61,7 +61,7 @@ section {
 
 /* Category table ******************************************** */
 .container_table {
-   height: 53rem;
+   height: 51rem;
    border: 1px solid #999;
    margin-right: 2rem;
    /* background-color: aquamarine; */
@@ -105,6 +105,19 @@ section {
    text-align: center;
 }
 
+#table_body {
+   cursor: pointer;
+}
+
+/* #table_body tr:hover {
+   outline: 2px solid rgb(149, 52, 10);
+   outline-offset: -3px;
+} */
+/* #table_body tr td {
+   background-color: rgb(247, 241, 127);
+   color: #000;
+} */
+
 .container_table-buttons {
    width: 14rem;
    margin: 2rem auto 0 auto;
@@ -113,7 +126,12 @@ section {
    justify-content: space-between;
 }
 
-/* Ortopedic form ******************************************* */
+/* .selected {
+   color: red;
+   background-color: red;
+} */
+
+/* Category form ******************************************* */
 
 .container_form {
    height: 33rem;
