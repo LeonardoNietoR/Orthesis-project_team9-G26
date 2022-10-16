@@ -109,27 +109,12 @@ section {
    cursor: pointer;
 }
 
-/* #table_body tr:hover {
-   outline: 2px solid rgb(149, 52, 10);
-   outline-offset: -3px;
-} */
-/* #table_body tr td {
-   background-color: rgb(247, 241, 127);
-   color: #000;
-} */
-
 .container_table-buttons {
    width: 14rem;
    margin: 2rem auto 0 auto;
-   /* background-color: aquamarine; */
    display: flex;
    justify-content: space-between;
 }
-
-/* .selected {
-   color: red;
-   background-color: red;
-} */
 
 /* Category form ******************************************* */
 
@@ -178,14 +163,11 @@ button {
    padding: 0.4rem 1.3rem;
    border: 1px solid #333;
    border-radius: 5px;
+   cursor: pointer;
 }
 
 button:active {
    font-size: 1.3rem;
-}
-
-button:focus {
-   cursor: pointer;
 }
 
 #btnCreate {

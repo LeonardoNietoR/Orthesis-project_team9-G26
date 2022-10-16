@@ -56,27 +56,24 @@ async function createCategory() {
    }
 }
 
-async function updateCategory(filaEditada) {
+async function updateCategory(filaEditada, id) {
    const dataToSend = {
-      id: parseInt(filaEditada[0].innerText),
-      name: filaEditada[1].innerText,
-      brand: filaEditada[2].innerText,
-      year: filaEditada[3].innerText,
-      description: filaEditada[4].innerText,
-      category_id: parseInt(filaEditada[5].innerText),
+      id: id,
+      name: filaEditada[0].innerText,
+      description: filaEditada[2].innerText,
    };
 
    console.log(dataToSend);
 
    try {
-      const response = await fetch(`${urlOrthesisRequest}/Category/update`, {
+      const response = await fetch(`${urlCategoryRequest}/Category/update`, {
          method: "PUT",
          body: JSON.stringify(dataToSend),
          headers: { "Content-type": "application/json" },
       });
 
       if (!response.ok) {
-         throw new Error("Error with put...");
+         throw new Error("Error with put...:" + response.statusText);
       }
 
       location.reload();
@@ -86,10 +83,20 @@ async function updateCategory(filaEditada) {
 }
 
 async function deleteCategory() {
-   const id = rowWithDetails.firstElementChild.innerText;
+   const rowSelected = Array.from(tableBody.children).find((row) => {
+      return row.dataset.rowIsSelected === "true";
+   });
+
+   if (!rowSelected) {
+      alert("Please select a category to delete");
+      return;
+   }
+
+   const id = rowSelected.dataset.idcategory;
+   console.log(id);
 
    try {
-      const response = await fetch(`${urlOrthesisRequest}/Category/${id}`, {
+      const response = await fetch(`${urlCategoryRequest}/Category/${id}`, {
          method: "DELETE",
          body: null,
       });
@@ -110,9 +117,9 @@ const llenarTablaCategory = (data) => {
    if (data) {
       data.forEach((item) => {
          const newRow = `
-          <tr class="tr_table" data-idCategory=${item.id} >
+          <tr class="tr_table" data-idcategory=${item.id} >
             <td>${item.name}</td>
-            <td>ortesisname</td>
+            <td>-- ortesisname --</td>
             <td>${item.description}</td>
           </tr>
          `;
@@ -122,15 +129,6 @@ const llenarTablaCategory = (data) => {
    }
 };
 
-const selectRow = () => {};
-
-// Event listeners **************************************************
-
-btnCreateCategory.addEventListener("click", (event) => {
-   event.preventDefault();
-   createCategory();
-});
-
 const effectsOnRows = (event) => {
    const rowSelected = event.target.closest(".tr_table");
 
@@ -139,11 +137,13 @@ const effectsOnRows = (event) => {
       tableBody.removeEventListener("mouseout", effectsOnRows);
 
       Array.from(tableBody.children).forEach((el) => {
+         el.dataset.rowIsSelected = "false";
          el.style.color = "#000";
          el.style.outline = "";
          el.style["outline-offset"] = "";
       });
 
+      rowSelected.dataset.rowIsSelected = "true";
       rowSelected.style.color = "rgb(149,52,10)";
       rowSelected.style.outline = "2px solid rgb(231, 78, 12)";
       rowSelected.style["outline-offset"] = "-3px";
@@ -161,6 +161,45 @@ const effectsOnRows = (event) => {
       return;
    }
 };
+
+const habilitarEdicionTabla = (event) => {
+   const rowSelected = Array.from(tableBody.children).find((row) => {
+      return row.dataset.rowIsSelected === "true";
+   });
+
+   if (!rowSelected) {
+      alert("Please select a category to edit");
+      return;
+   }
+
+   if (event.target.dataset.type === "edit") {
+      Array.from(rowSelected.children).forEach((elem, index) => {
+         if (index !== 1) {
+            elem.setAttribute("contenteditable", "");
+         }
+         if (index === 0) elem.focus();
+      });
+
+      btnEditCategory.innerText = "Save";
+      event.target.dataset.type = "save";
+      return;
+   }
+   console.log(rowSelected);
+
+   const rowEditedId = parseInt(rowSelected.dataset.idcategory);
+   updateCategory(Array.from(rowSelected.children), rowEditedId);
+};
+
+// Event listeners **************************************************
+
+btnCreateCategory.addEventListener("click", (event) => {
+   event.preventDefault();
+   createCategory();
+});
+
+btnEditCategory.addEventListener("click", habilitarEdicionTabla);
+
+btnDeleteCategory.addEventListener("click", deleteCategory);
 
 tableBody.addEventListener("click", effectsOnRows);
 tableBody.addEventListener("mouseover", effectsOnRows);

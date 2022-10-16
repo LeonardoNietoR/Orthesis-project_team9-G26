@@ -103,6 +103,7 @@ async function updateOrthesis(filaEditada) {
 
 async function deleteOrthesis() {
    const id = rowWithDetails.firstElementChild.innerText;
+   console.log(id);
 
    try {
       const response = await fetch(`${urlOrthesisRequest}/Ortopedic/${id}`, {
@@ -163,7 +164,7 @@ const habilitarEdicionTablaDetalles = (event) => {
          if (index === 1) elem.focus();
       });
 
-      btnEditOrtopedic.innerText = "save";
+      btnEditOrtopedic.innerText = "Save";
       event.target.dataset.type = "save";
       return;
    }
