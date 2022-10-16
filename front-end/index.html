@@ -4,9 +4,10 @@
       <meta charset="UTF-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
       <link rel="stylesheet" href="style.css" />
 
-      <title>Proyecto orthesis</title>
+            <title>Proyecto orthesis</title>
    </head>
    <body>
       <h1 id="uno">Orthesis App</h1>
@@ -20,13 +21,14 @@
                      <th>Id</th>
                      <th>Name</th>
                      <th>Brand</th>
-                     <th>Model</th>
+                     <th>Year</th>
+                     <th>Description</th>
                      <th>Category_Id</th>
                   </tr>
                </thead>
                <tbody id="table_orthesis-tbody"></tbody>
             </table>
-         </div>
+            </div>
          <div class="container_form">
             <h2>Create orthesis</h2>
             <form action="" class="form form_orthesis">
@@ -47,17 +49,27 @@
                   />
                </div>
                <div>
-                  <label for="orthesis_model">Model</label>
+                  <label for="orthesis_year">Year</label>
                   <input
-                     type="text"
-                     id="orthesis_model"
-                     name="orthesis_model"
+                     type="number"
+                     maxlength="4"
+                     id="orthesis_year"
+                     name="orthesis_year"
                   />
+               </div>
+               <div>
+                  <label for="orthesis_description">Description</label>
+                  <textarea
+                     name="orthesis_description"
+                     id="orthesis_description"
+                     cols="30"
+                     rows="3"
+                  ></textarea>
                </div>
                <div>
                   <label for="orthesis_categoryId">Category id</label>
                   <input
-                     type="text"
+                     type="number"
                      id="orthesis_categoryId"
                      name="orthesis_categoryId"
                   />
@@ -149,10 +161,19 @@
          </div>
          <br /><br />
       </section>
+      <section>
+         <p>test</p>
+      </section>
       <br /><br />
 
       <script type="text/javascript" src="JS files/orthesis.js"></script>
       <script type="text/javascript" src="JS files/client.js"></script>
       <script type="text/javascript" src="JS files/message.js"></script>
+
+      <div>
+         <a href="Category.html"> IR A SECCION CATEGORIA</a>
+         
+         </div>    
+      
    </body>
 </html>
