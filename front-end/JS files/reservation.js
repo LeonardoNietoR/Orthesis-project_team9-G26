@@ -64,7 +64,6 @@ async function updateReservation(filaEditada, id) {
       devolutionDate: filaEditada[5].innerText,
    };
 
-   console.log(dataToSend);
 
    try {
       const response = await fetch(

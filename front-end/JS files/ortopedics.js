@@ -49,9 +49,7 @@ async function createOrthesis() {
          brand: inputOrthesisBrand.value,
          year: parseInt(inputOrthesisYear.value),
          description: inputOrthesisDescription.value,
-         // category_id: parseInt(inputOrthesisCategory.value),
-         // user must create at least one category first, before creating an ortopedic. User must select the category from a dropdown menu with the name, and here we get the id of that name which is sent as {id:#}
-         // category: { id: 1 },
+        
       };
 
       try {
@@ -82,7 +80,6 @@ async function updateOrthesis(filaEditada) {
       category_id: parseInt(filaEditada[5].innerText),
    };
 
-   console.log(dataToSend);
 
    try {
       const response = await fetch(`${urlOrthesisRequest}/Ortopedic/update`, {
@@ -103,7 +100,6 @@ async function updateOrthesis(filaEditada) {
 
 async function deleteOrthesis() {
    const id = rowWithDetails.firstElementChild.innerText;
-   console.log(id);
 
    try {
       const response = await fetch(`${urlOrthesisRequest}/Ortopedic/${id}`, {
@@ -136,7 +132,6 @@ const llenarListaOrtopedics = (data) => {
 };
 
 const llenarTablaDetailsOrtopedic = (data) => {
-   console.log(data);
 
    if (data) {
       Array.from(rowWithDetails.children).forEach((el, index) => {
@@ -164,7 +159,6 @@ const habilitarEdicionTablaDetalles = (event) => {
          if (index === 1) elem.focus();
       });
 
-      console.log(event.target.dataset.type);
 
       btnEditOrtopedic.innerText = "Save";
       event.target.dataset.type = "save";

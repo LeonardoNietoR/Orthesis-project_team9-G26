@@ -17,7 +17,7 @@ async function readClient() {
       const data = await response.json();
       console.log(data);
 
-      // sessionStorage.setItem("dataClient", JSON.stringify(data));
+      sessionStorage.setItem("dataClient", JSON.stringify(data));
 
       llenarTablaClient(data);
    } catch (err) {
@@ -186,7 +186,6 @@ const habilitarEdicionTabla = (event) => {
    }
 
    const rowEditedId = parseInt(rowSelected.dataset.id);
-   console.log(rowEditedId);
 
    updateClient(Array.from(rowSelected.children), rowEditedId);
 };

@@ -59,7 +59,7 @@ section {
    border: 1px solid #ccc;
 }
 
-/* Category table ******************************************** */
+/*  table ******************************************** */
 .container_table {
    height: 51rem;
    border: 1px solid #999;
@@ -116,7 +116,7 @@ section {
    justify-content: space-between;
 }
 
-/* Category form ******************************************* */
+/*  form ******************************************* */
 
 .container_form {
    height: 33rem;
