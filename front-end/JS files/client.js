@@ -1,64 +1,81 @@
-const tbodyTablaClient = document.getElementById("table_client-tbody");
-const btnRegisterClient = document.getElementById("btnRegisterClient");
-const inputCLientId = document.getElementById("client_id");
-const inputCLientName = document.getElementById("client_name");
-const inputCLientEmail = document.getElementById("client_email");
-const inputCLientAge = document.getElementById("client_age");
+const btnCreate = document.getElementById("btnCreate");
+const btnEdit = document.getElementById("btnEdit");
+const btnDelete = document.getElementById("btnDelete");
+const tableBody = document.getElementById("table_body");
+const inputClientName = document.getElementById("client_name");
+const inputClientAge = document.getElementById("client_age");
+const inputClientEmail = document.getElementById("client_email");
+const inputClientPassword = document.getElementById("client_password");
 
-const urlClientRequest =
-   "https://g400927313eea0e-g7e55587xh9qd4mr.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/client/client";
+const urlClientRequest = "http://localhost:8080/api";
 
-// CRUD Client ------------------------------------------------------
+// CRUD CLIENT ------------------------------------------------------
 
 async function readClient() {
-   const response = await fetch(urlClientRequest);
-   const data = await response.json();
-
-   llenarTablaClient(data.items);
-}
-
-async function createClient() {
-   const dataToSend = {
-      id: parseInt(inputCLientId.value),
-      name: inputCLientName.value,
-      email: inputCLientEmail.value,
-      age: parseInt(inputCLientAge.value),
-   };
-
    try {
-      const response = await fetch(urlClientRequest, {
-         method: "POST",
-         body: JSON.stringify(dataToSend),
-         headers: { "Content-type": "application/json" },
-      });
+      const response = await fetch(`${urlClientRequest}/Client/all`);
+      const data = await response.json();
+      console.log(data);
 
-      if (!response.ok) {
-         throw new Error("Error with post");
-      }
+      // sessionStorage.setItem("dataClient", JSON.stringify(data));
 
-      location.reload();
+      llenarTablaClient(data);
    } catch (err) {
       console.log(err);
    }
 }
 
-async function updateClient(filaEditada) {
+async function createClient() {
+   if (
+      inputClientName.value !== "" &&
+      inputClientAge.value !== "" &&
+      inputClientEmail.value !== "" &&
+      inputClientPassword.value !== ""
+   ) {
+      const dataToSend = {
+         name: inputClientName.value,
+         age: inputClientAge.value,
+         email: inputClientEmail.value,
+         password: inputClientPassword.value,
+      };
+
+      try {
+         const response = await fetch(`${urlClientRequest}/Client/save`, {
+            method: "POST",
+            body: JSON.stringify(dataToSend),
+            headers: { "Content-type": "application/json" },
+         });
+
+         if (!response.ok) {
+            throw new Error("Error with post");
+         }
+
+         location.reload();
+      } catch (err) {
+         console.log(err);
+      }
+   }
+}
+
+async function updateClient(filaEditada, id) {
    const dataToSend = {
-      id: parseInt(filaEditada[0].innerText),
-      name: filaEditada[1].innerText,
+      idClient: id,
+      name: filaEditada[0].innerText,
+      age: filaEditada[1].innerText,
       email: filaEditada[2].innerText,
-      age: parseInt(filaEditada[3].innerText),
    };
 
+   console.log(dataToSend);
+
    try {
-      const response = await fetch(urlClientRequest, {
+      const response = await fetch(`${urlClientRequest}/Client/update`, {
          method: "PUT",
          body: JSON.stringify(dataToSend),
          headers: { "Content-type": "application/json" },
       });
 
       if (!response.ok) {
-         throw new Error("Error with put...");
+         throw new Error("Error with put...:" + response.statusText);
       }
 
       location.reload();
@@ -67,9 +84,21 @@ async function updateClient(filaEditada) {
    }
 }
 
-async function deleteClient(id) {
+async function deleteClient() {
+   const rowSelected = Array.from(tableBody.children).find((row) => {
+      return row.dataset.rowIsSelected === "true";
+   });
+
+   if (!rowSelected) {
+      alert("Please select a client to delete");
+      return;
+   }
+
+   const id = rowSelected.dataset.id;
+   console.log(id);
+
    try {
-      const response = await fetch(`${urlClientRequest}/${id}`, {
+      const response = await fetch(`${urlClientRequest}/Client/${id}`, {
          method: "DELETE",
          body: null,
       });
@@ -87,51 +116,92 @@ async function deleteClient(id) {
 readClient();
 
 const llenarTablaClient = (data) => {
-   data.forEach((item) => {
-      const newClient = tbodyTablaClient.insertRow();
+   if (data) {
+      data.forEach((item) => {
+         const newRow = `
+          <tr class="tr_table" data-id=${item.idClient} >
+            <td>${item.name}</td>
+            <td>${item.age}</td>
+            <td>${item.email}</td>
+          </tr>
+         `;
 
-      newClient.insertCell([0]).innerHTML = item.id;
-      newClient.insertCell([1]).innerHTML = item.name;
-      newClient.insertCell([2]).innerHTML = item.age;
-      newClient.insertCell([3]).innerHTML = item.email;
-      newClient.insertCell([
-         4,
-      ]).innerHTML = `<button onClick="habilitarEdicionTablaClient(this)">Edit</button>`;
-      newClient.insertCell([
-         5,
-      ]).innerHTML = `<button onClick="deleteClient(${item.id})">Delete</button> `;
-   });
+         tableBody.insertAdjacentHTML("beforeend", newRow);
+      });
+   }
 };
 
-const habilitarEdicionTablaClient = (eventTarget) => {
-   const tdContenedorEditBtn = eventTarget.parentElement;
-   const filaAEditar = eventTarget.parentElement.parentElement;
-   const arrayFilaAEditar = Array.from(filaAEditar.children);
+const effectsOnRows = (event) => {
+   const rowSelected = event.target.closest(".tr_table");
 
-   arrayFilaAEditar.forEach((elem, index) => {
-      if (
-         index !== 0 &&
-         index !== arrayFilaAEditar.length - 1 &&
-         index !== arrayFilaAEditar.length - 2
-      )
+   if (event.type === "click") {
+      tableBody.removeEventListener("mouseover", effectsOnRows);
+      tableBody.removeEventListener("mouseout", effectsOnRows);
+
+      Array.from(tableBody.children).forEach((el) => {
+         el.dataset.rowIsSelected = "false";
+         el.style.color = "#000";
+         el.style.outline = "";
+         el.style["outline-offset"] = "";
+      });
+
+      rowSelected.dataset.rowIsSelected = "true";
+      rowSelected.style.color = "rgb(149,52,10)";
+      rowSelected.style.outline = "2px solid rgb(231, 78, 12)";
+      rowSelected.style["outline-offset"] = "-3px";
+
+      return;
+   }
+   if (event.type === "mouseover") {
+      rowSelected.style.outline = "2px solid rgb(231, 78, 12)";
+      rowSelected.style["outline-offset"] = "-3px";
+      return;
+   }
+   if (event.type === "mouseout") {
+      rowSelected.style.outline = "";
+      rowSelected.style["outline-offset"] = "";
+      return;
+   }
+};
+
+const habilitarEdicionTabla = (event) => {
+   const rowSelected = Array.from(tableBody.children).find((row) => {
+      return row.dataset.rowIsSelected === "true";
+   });
+
+   if (!rowSelected) {
+      alert("Please select a client to edit");
+      return;
+   }
+
+   if (event.target.dataset.type === "edit") {
+      Array.from(rowSelected.children).forEach((elem, index) => {
          elem.setAttribute("contenteditable", "");
-      if (index === 1) elem.focus();
-   });
+         if (index === 0) elem.focus();
+      });
 
-   crearBtnGuardarClient(tdContenedorEditBtn);
+      btnEdit.innerText = "Save";
+      event.target.dataset.type = "save";
+      return;
+   }
+
+   const rowEditedId = parseInt(rowSelected.dataset.id);
+   console.log(rowEditedId);
+
+   updateClient(Array.from(rowSelected.children), rowEditedId);
 };
 
-const crearBtnGuardarClient = (contenedorBtn) => {
-   const btnGuardar = document.createElement("button");
-   btnGuardar.textContent = "Save";
-   contenedorBtn.innerHTML = "";
-   contenedorBtn.prepend(btnGuardar);
-   btnGuardar.addEventListener("click", () => {
-      updateClient(Array.from(contenedorBtn.parentElement.cells));
-   });
-};
+// Event listeners **************************************************
 
-btnRegisterClient.addEventListener("click", (event) => {
+btnCreate.addEventListener("click", (event) => {
    event.preventDefault();
    createClient();
 });
+
+btnEdit.addEventListener("click", habilitarEdicionTabla);
+
+btnDelete.addEventListener("click", deleteClient);
+
+tableBody.addEventListener("click", effectsOnRows);
+tableBody.addEventListener("mouseover", effectsOnRows);
+tableBody.addEventListener("mouseout", effectsOnRows);

@@ -9,7 +9,7 @@ const inputCategoryDescription = document.getElementById(
 
 const urlCategoryRequest = "http://localhost:8080/api";
 
-// CRUD Category ------------------------------------------------------
+// CRUD CATEGORY ------------------------------------------------------
 
 async function readCategory() {
    try {

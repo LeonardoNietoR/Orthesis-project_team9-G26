@@ -19,7 +19,7 @@ const containerDetails = document.querySelector(".container_details");
 
 const urlOrthesisRequest = "http://localhost:8080/api";
 
-// CRUD Ortopedic ------------------------------------------------------
+// CRUD ORTOPEDIC ------------------------------------------------------
 
 async function readOrthesis() {
    try {
@@ -164,6 +164,8 @@ const habilitarEdicionTablaDetalles = (event) => {
          if (index === 1) elem.focus();
       });
 
+      console.log(event.target.dataset.type);
+
       btnEditOrtopedic.innerText = "Save";
       event.target.dataset.type = "save";
       return;
@@ -181,7 +183,8 @@ btnCreateOrthesis.addEventListener("click", (event) => {
 });
 
 containerOrtopedicsList.addEventListener("click", (event) => {
-   const dataOrtopedics = JSON.parse(sessionStorage.getItem("dataOrt"));
+   const dataOrtopedics = JSON.parse(sessionStorage.getItem("dataOrtesis"));
+
    const ortopedicInfo = dataOrtopedics.find(
       (el) => el.id === parseInt(event.target.dataset.id)
    );
@@ -195,4 +198,6 @@ btnDeleteOrtopedic.addEventListener("click", deleteOrthesis);
 
 btnCloseDetails.addEventListener("click", () => {
    containerDetails.classList.add("hide");
+   btnEditOrtopedic.innerText = "Edit";
+   btnEditOrtopedic.dataset.type = "edit";
 });

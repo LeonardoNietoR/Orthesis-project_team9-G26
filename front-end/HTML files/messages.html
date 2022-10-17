@@ -9,29 +9,35 @@
    </head>
    <body>
       <!-- MESSAGE SECTION  ************************************************************************************************************* -->
-      <section class="message">
+      <header class="header">
+         <div class="container_button-back">
+            <a class="btn_back" href="../homePage.html">home</a>
+         </div>
+      </header>
+      <section>
          <div class="container_table">
             <h2>Messages</h2>
-            <table class="table table_message">
-               <thead>
-                  <tr>
-                     <th>Id</th>
-                     <th>Message_text</th>
-                  </tr>
-               </thead>
-               <tbody id="table_message-tbody"></tbody>
-            </table>
+            <div class="wrapper-table">
+               <table class="table">
+                  <thead>
+                     <tr>
+                        <th>Message</th>
+                        <th>Ortopedic</th>
+                     </tr>
+                  </thead>
+                  <tbody id="table_body"></tbody>
+               </table>
+            </div>
+            <div class="container_table-buttons">
+               <button id="btnEdit" type="button" data-type="edit">Edit</button>
+               <button id="btnDelete" type="button">Delete</button>
+            </div>
          </div>
-
          <div class="container_form">
-            <h2>Register message</h2>
-            <form action="" class="form form_mensaje">
+            <h2>Create message</h2>
+            <form action="" class="form">
                <div>
-                  <label for="message_id">Id Message</label>
-                  <input type="number" id="message_id" name="message_id" />
-               </div>
-               <div>
-                  <label for="message_messageText">Message Text</label>
+                  <label for="message_messageText">Message:</label>
                   <textarea
                      name="message_messageText"
                      id="message_messageText"
@@ -39,12 +45,19 @@
                      rows="5"
                   ></textarea>
                </div>
-               <button id="btnRegisterMessage" type="submit">
-                  Register message
-               </button>
+               <div>
+                  <label for="message_ortopedic">Ortopedic:</label>
+
+                  <select name="" id="message_ortopedic">
+                     <option value="">-- select an ortopedic --</option>
+                     <!-- <option value="op1">option 1</option>
+                     <option value="op2">option 2</option> -->
+                  </select>
+               </div>
+
+               <button id="btnCreate" type="submit">Create message</button>
             </form>
          </div>
-         <br /><br />
       </section>
       <script type="text/javascript" src="../JS files/message.js"></script>
    </body>
