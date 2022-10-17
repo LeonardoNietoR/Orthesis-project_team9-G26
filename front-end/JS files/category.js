@@ -119,7 +119,7 @@ const llenarTablaCategory = (data) => {
          const newRow = `
           <tr class="tr_table" data-idcategory=${item.id} >
             <td>${item.name}</td>
-            <td>-- ortesisname --</td>
+            <td>-- ortesis list --</td>
             <td>${item.description}</td>
           </tr>
          `;

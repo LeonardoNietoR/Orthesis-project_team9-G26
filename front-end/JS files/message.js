@@ -109,7 +109,7 @@ const llenarTabla = (data) => {
          const newRow = `
           <tr class="tr_table" data-id=${item.idMessage} >
             <td>${item.messageText}</td>
-            <td>-- ortopedics name --</td>
+            <td>-- ortopedic name --</td>
           </tr>
          `;
 

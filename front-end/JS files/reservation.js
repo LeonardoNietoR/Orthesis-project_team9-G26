@@ -126,8 +126,8 @@ const llenarTabla = (data) => {
           <tr class="tr_table" data-id=${item.idReservation} >
 
             <td>${item.idReservation}</td>
-            <td>-- ortopedics name --</td>
-            <td>-- client id --</td>
+            <td>-- ortopedic name --</td>
+            <td>-- client_id --</td>
             <td>${item.status}</td>
             <td>${item.startDate}</td>
             <td>${item.devolutionDate}</td>
