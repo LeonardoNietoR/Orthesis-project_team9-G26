@@ -163,7 +163,7 @@ const habilitarEdicionTabla = (event) => {
 
    if (event.target.dataset.type === "edit") {
       Array.from(rowSelected.children).forEach((elem, index) => {
-         elem.setAttribute("contenteditable", "");
+         if (index !== 1) elem.setAttribute("contenteditable", "");
          if (index === 0) elem.focus();
       });
 
