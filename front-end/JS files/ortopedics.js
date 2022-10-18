@@ -5,7 +5,7 @@ const inputOrthesisId = document.getElementById("orthesis_id");
 const inputOrthesisName = document.getElementById("orthesis_name");
 const inputOrthesisBrand = document.getElementById("orthesis_brand");
 const inputOrthesisYear = document.getElementById("orthesis_year");
-const inputOrthesisCategory = document.getElementById("orthesis_categoryId");
+const inputOrthesisCategory = document.getElementById("orthesis_category");
 const containerOrtopedicsList = document.getElementById("ortopedic_list");
 const rowWithDetails = document.getElementById("table_details-row");
 const btnEditOrtopedic = document.getElementById("btnEditOrtopedic");
@@ -38,6 +38,10 @@ async function readOrthesis() {
 }
 
 async function createOrthesis() {
+   const categoryValue = inputOrthesisCategory.value
+      ? { id: parseInt(inputOrthesisCategory.value) }
+      : null;
+
    if (
       inputOrthesisName.value !== "" &&
       inputOrthesisBrand.value !== "" &&
@@ -49,7 +53,7 @@ async function createOrthesis() {
          brand: inputOrthesisBrand.value,
          year: parseInt(inputOrthesisYear.value),
          description: inputOrthesisDescription.value,
-        
+         category: categoryValue,
       };
 
       try {
@@ -77,9 +81,8 @@ async function updateOrthesis(filaEditada) {
       brand: filaEditada[2].innerText,
       year: filaEditada[3].innerText,
       description: filaEditada[4].innerText,
-      category_id: parseInt(filaEditada[5].innerText),
+      category: parseInt(filaEditada[5].innerText),
    };
-
 
    try {
       const response = await fetch(`${urlOrthesisRequest}/Ortopedic/update`, {
@@ -117,22 +120,31 @@ async function deleteOrthesis() {
    }
 }
 
-readOrthesis();
+const llenarListaOptionsOfCategory = () => {
+   const categoryList = JSON.parse(sessionStorage.getItem("dataCategory"));
 
+   if (categoryList) {
+      categoryList.forEach((categ) => {
+         const html = `<option value="${categ.id}">${categ.name}</option>`;
+         inputOrthesisCategory.insertAdjacentHTML("beforeend", html);
+      });
+   }
+};
 const llenarListaOrtopedics = (data) => {
    if (data) {
       data.forEach((item) => {
-         const newListElement = `<li><a href="#" data-id=${item.id} >${item.name}</a></li>`;
+         const newListElement = `<li ><a href="#" class="ortopedic_item" data-id=${item.id} >${item.name}</a></li>`;
          containerOrtopedicsList.insertAdjacentHTML(
             "beforeend",
             newListElement
          );
       });
    }
+
+   console.log(data);
 };
 
 const llenarTablaDetailsOrtopedic = (data) => {
-
    if (data) {
       Array.from(rowWithDetails.children).forEach((el, index) => {
          if (index === 0) el.innerHTML = data.id;
@@ -140,7 +152,8 @@ const llenarTablaDetailsOrtopedic = (data) => {
          if (index === 2) el.innerHTML = data.brand;
          if (index === 3) el.innerHTML = data.year;
          if (index === 4) el.innerHTML = data.description;
-         if (index === 5) el.innerHTML = data.category_id;
+         if (index === 5)
+            el.innerHTML = data.category ? data.category.name : "not specified";
       });
 
       titleNameDetail.innerText = `"${data.name}"`;
@@ -159,7 +172,6 @@ const habilitarEdicionTablaDetalles = (event) => {
          if (index === 1) elem.focus();
       });
 
-
       btnEditOrtopedic.innerText = "Save";
       event.target.dataset.type = "save";
       return;
@@ -169,6 +181,21 @@ const habilitarEdicionTablaDetalles = (event) => {
    containerDetails.classList.add("hide");
 };
 
+const seleccionarOrtesis = (event) => {
+   const dataOrtopedics = JSON.parse(sessionStorage.getItem("dataOrtesis"));
+
+   if (event.target.classList.contains("ortopedic_item")) {
+      const ortopedicInfo = dataOrtopedics.find(
+         (el) => el.id === parseInt(event.target.dataset.id)
+      );
+      containerDetails.classList.remove("hide");
+      llenarTablaDetailsOrtopedic(ortopedicInfo);
+   }
+};
+
+readOrthesis();
+llenarListaOptionsOfCategory();
+
 // Event listeners **************************************************
 
 btnCreateOrthesis.addEventListener("click", (event) => {
@@ -176,15 +203,7 @@ btnCreateOrthesis.addEventListener("click", (event) => {
    createOrthesis();
 });
 
-containerOrtopedicsList.addEventListener("click", (event) => {
-   const dataOrtopedics = JSON.parse(sessionStorage.getItem("dataOrtesis"));
-
-   const ortopedicInfo = dataOrtopedics.find(
-      (el) => el.id === parseInt(event.target.dataset.id)
-   );
-   containerDetails.classList.remove("hide");
-   llenarTablaDetailsOrtopedic(ortopedicInfo);
-});
+containerOrtopedicsList.addEventListener("click", seleccionarOrtesis);
 
 btnEditOrtopedic.addEventListener("click", habilitarEdicionTablaDetalles);
 

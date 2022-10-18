@@ -125,6 +125,10 @@ section {
    width: 60%;
 }
 
+#orthesis_category {
+   width: 60%;
+}
+
 button {
    font-size: 1.4rem;
    padding: 0.4rem 1.3rem;
