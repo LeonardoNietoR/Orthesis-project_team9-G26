@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="../CSS files/client.css" />
+      <!-- <link rel="stylesheet" href="../CSS files/stylesSecondaryPages.css" /> -->
+      <title>Client</title>
+   </head>
+   <body>
+      <!-- CLIENT SECTION  ************************************************************************************************************* -->
+      <header class="header">
+         <div class="container_button-back">
+            <a class="btn_back" href="../homePage.html">home</a>
+         </div>
+      </header>
+      <section>
+         <div class="container_table">
+            <h2>Clients</h2>
+            <div class="wrapper-table">
+               <table class="table">
+                  <thead>
+                     <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                     </tr>
+                  </thead>
+                  <tbody id="table_body"></tbody>
+               </table>
+            </div>
+            <div class="container_table-buttons">
+               <button id="btnEdit" type="button" data-type="edit">Edit</button>
+               <button id="btnDelete" type="button">Delete</button>
+            </div>
+         </div>
+         <div class="container_form">
+            <h2>Create client</h2>
+            <form action="" class="form">
+               <div>
+                  <label for="client_name">Name:</label>
+                  <input type="text" id="client_name" name="client_name" />
+               </div>
+               <div>
+                  <label for="client_age">Age:</label>
+                  <input
+                     type="number"
+                     id="client_age"
+                     name="client_age"
+                     max="2"
+                  />
+               </div>
+               <div>
+                  <label for="client_email">Email:</label>
+                  <input type="email" id="client_email" name="client_email" />
+               </div>
+               <div>
+                  <label for="client_password">Password</label>
+                  <input
+                     type="password"
+                     id="client_password"
+                     name="client_password"
+                  />
+               </div>
+
+               <button id="btnCreate" type="submit">Create client</button>
+            </form>
+         </div>
+      </section>
+
+      <script type="text/javascript" src="../JS files/client.js"></script>
+   </body>
+</html>

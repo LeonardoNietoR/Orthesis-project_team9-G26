@@ -1,36 +1,45 @@
-const btnCreate = document.getElementById("btnCreate");
-const btnEdit = document.getElementById("btnEdit");
-const btnDelete = document.getElementById("btnDelete");
+const btnCreateCategory = document.getElementById("btnCreate");
+const btnEditCategory = document.getElementById("btnEditCategory");
+const btnDeleteCategory = document.getElementById("btnDeleteCategory");
 const tableBody = document.getElementById("table_body");
-const inputMessageText = document.getElementById("message_messageText");
-const inputMessageOrtopedic = document.getElementById("message_ortopedic");
+const inputCategoryName = document.getElementById("category_name");
+const inputCategoryDescription = document.getElementById(
+   "category_description"
+);
 
-const urlMessageRequest = "http://localhost:8080/api";
+const urlCategoryRequest = "http://localhost:8080/api";
 
-// CRUD MESSAGE ------------------------------------------------------
+// CRUD CATEGORY ------------------------------------------------------
 
-async function readMessage() {
+async function readCategory() {
    try {
-      const response = await fetch(`${urlMessageRequest}/Message/all`);
+      const response = await fetch(`${urlCategoryRequest}/Category/all`);
       const data = await response.json();
       console.log(data);
 
-      // sessionStorage.setItem("dataClient", JSON.stringify(data));
+      sessionStorage.setItem("dataCategory", JSON.stringify(data));
 
-      llenarTabla(data);
+      llenarTablaCategory(data);
    } catch (err) {
       console.log(err);
    }
 }
 
-async function createMessage() {
-   if (inputMessageText.value !== "") {
+async function createCategory() {
+   console.log(inputCategoryName.value);
+   console.log(inputCategoryDescription.value);
+
+   if (
+      inputCategoryName.value !== "" &&
+      inputCategoryDescription.value !== ""
+   ) {
       const dataToSend = {
-         messageText: inputMessageText.value,
+         name: inputCategoryName.value,
+         description: inputCategoryDescription.value,
       };
 
       try {
-         const response = await fetch(`${urlMessageRequest}/Message/save`, {
+         const response = await fetch(`${urlCategoryRequest}/Category/save`, {
             method: "POST",
             body: JSON.stringify(dataToSend),
             headers: { "Content-type": "application/json" },
@@ -47,16 +56,17 @@ async function createMessage() {
    }
 }
 
-async function updateMessage(filaEditada, id) {
+async function updateCategory(filaEditada, id) {
    const dataToSend = {
-      idMessage: id,
-      messageText: filaEditada[0].innerText,
+      id: id,
+      name: filaEditada[0].innerText,
+      description: filaEditada[2].innerText,
    };
 
    console.log(dataToSend);
 
    try {
-      const response = await fetch(`${urlMessageRequest}/Message/update`, {
+      const response = await fetch(`${urlCategoryRequest}/Category/update`, {
          method: "PUT",
          body: JSON.stringify(dataToSend),
          headers: { "Content-type": "application/json" },
@@ -72,21 +82,21 @@ async function updateMessage(filaEditada, id) {
    }
 }
 
-async function deleteMessage() {
+async function deleteCategory() {
    const rowSelected = Array.from(tableBody.children).find((row) => {
       return row.dataset.rowIsSelected === "true";
    });
 
    if (!rowSelected) {
-      alert("Please select a message to delete");
+      alert("Please select a category to delete");
       return;
    }
 
-   const id = rowSelected.dataset.id;
+   const id = rowSelected.dataset.idcategory;
    console.log(id);
 
    try {
-      const response = await fetch(`${urlMessageRequest}/Message/${id}`, {
+      const response = await fetch(`${urlCategoryRequest}/Category/${id}`, {
          method: "DELETE",
          body: null,
       });
@@ -101,15 +111,16 @@ async function deleteMessage() {
    }
 }
 
-readMessage();
+readCategory();
 
-const llenarTabla = (data) => {
+const llenarTablaCategory = (data) => {
    if (data) {
       data.forEach((item) => {
          const newRow = `
-          <tr class="tr_table" data-id=${item.idMessage} >
-            <td>${item.messageText}</td>
-            <td>-- ortopedic name --</td>
+          <tr class="tr_table" data-idcategory=${item.id} >
+            <td>${item.name}</td>
+            <td>-- ortesis list --</td>
+            <td>${item.description}</td>
           </tr>
          `;
 
@@ -157,36 +168,38 @@ const habilitarEdicionTabla = (event) => {
    });
 
    if (!rowSelected) {
-      alert("Please select a message to edit");
+      alert("Please select a category to edit");
       return;
    }
 
    if (event.target.dataset.type === "edit") {
       Array.from(rowSelected.children).forEach((elem, index) => {
-         if (index !== 1) elem.setAttribute("contenteditable", "");
+         if (index !== 1) {
+            elem.setAttribute("contenteditable", "");
+         }
          if (index === 0) elem.focus();
       });
 
-      btnEdit.innerText = "Save";
+      btnEditCategory.innerText = "Save";
       event.target.dataset.type = "save";
       return;
    }
+   console.log(rowSelected);
 
-   const rowEditedId = parseInt(rowSelected.dataset.id);
-
-   updateMessage(Array.from(rowSelected.children), rowEditedId);
+   const rowEditedId = parseInt(rowSelected.dataset.idcategory);
+   updateCategory(Array.from(rowSelected.children), rowEditedId);
 };
 
 // Event listeners **************************************************
 
-btnCreate.addEventListener("click", (event) => {
+btnCreateCategory.addEventListener("click", (event) => {
    event.preventDefault();
-   createMessage();
+   createCategory();
 });
 
-btnEdit.addEventListener("click", habilitarEdicionTabla);
+btnEditCategory.addEventListener("click", habilitarEdicionTabla);
 
-btnDelete.addEventListener("click", deleteMessage);
+btnDeleteCategory.addEventListener("click", deleteCategory);
 
 tableBody.addEventListener("click", effectsOnRows);
 tableBody.addEventListener("mouseover", effectsOnRows);

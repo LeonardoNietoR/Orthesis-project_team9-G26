@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="../CSS files/message.css" />
+      <title>Message</title>
+   </head>
+   <body>
+      <!-- MESSAGE SECTION  ************************************************************************************************************* -->
+      <header class="header">
+         <div class="container_button-back">
+            <a class="btn_back" href="../homePage.html">home</a>
+         </div>
+      </header>
+      <section>
+         <div class="container_table">
+            <h2>Messages</h2>
+            <div class="wrapper-table">
+               <table class="table">
+                  <thead>
+                     <tr>
+                        <th>Message</th>
+                        <th>Ortopedic</th>
+                     </tr>
+                  </thead>
+                  <tbody id="table_body"></tbody>
+               </table>
+            </div>
+            <div class="container_table-buttons">
+               <button id="btnEdit" type="button" data-type="edit">Edit</button>
+               <button id="btnDelete" type="button">Delete</button>
+            </div>
+         </div>
+         <div class="container_form">
+            <h2>Create message</h2>
+            <form action="" class="form">
+               <div>
+                  <label for="message_messageText">Message:</label>
+                  <textarea
+                     name="message_messageText"
+                     id="message_messageText"
+                     cols="30"
+                     rows="5"
+                  ></textarea>
+               </div>
+               <div>
+                  <label for="message_ortopedic">Ortopedic:</label>
+
+                  <select name="" id="message_ortopedic">
+                     <option value="">-- select an ortopedic --</option>
+                     <!-- <option value="op1">option 1</option>
+                     <option value="op2">option 2</option> -->
+                  </select>
+               </div>
+
+               <button id="btnCreate" type="submit">Create message</button>
+            </form>
+         </div>
+      </section>
+      <script type="text/javascript" src="../JS files/message.js"></script>
+   </body>
+</html>

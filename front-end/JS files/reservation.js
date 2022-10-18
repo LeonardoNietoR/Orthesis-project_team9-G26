@@ -2,20 +2,23 @@ const btnCreate = document.getElementById("btnCreate");
 const btnEdit = document.getElementById("btnEdit");
 const btnDelete = document.getElementById("btnDelete");
 const tableBody = document.getElementById("table_body");
-const inputMessageText = document.getElementById("message_messageText");
-const inputMessageOrtopedic = document.getElementById("message_ortopedic");
+const inputClientId = document.getElementById("reservation_client");
+const inputStartDate = document.getElementById("reservation_startDate");
+const inputDevolutionDate = document.getElementById(
+   "reservation_devolutionDate"
+);
 
-const urlMessageRequest = "http://localhost:8080/api";
+const urlReservationRequest = "http://localhost:8080/api";
 
-// CRUD MESSAGE ------------------------------------------------------
+// CRUD RESERVATION ------------------------------------------------------
 
-async function readMessage() {
+async function readReservation() {
    try {
-      const response = await fetch(`${urlMessageRequest}/Message/all`);
+      const response = await fetch(`${urlReservationRequest}/Reservation/all`);
       const data = await response.json();
       console.log(data);
 
-      // sessionStorage.setItem("dataClient", JSON.stringify(data));
+      sessionStorage.setItem("dataClient", JSON.stringify(data));
 
       llenarTabla(data);
    } catch (err) {
@@ -23,18 +26,24 @@ async function readMessage() {
    }
 }
 
-async function createMessage() {
-   if (inputMessageText.value !== "") {
+async function createReservation() {
+   if (inputStartDate.value !== "" && inputDevolutionDate.value !== "") {
       const dataToSend = {
-         messageText: inputMessageText.value,
+         startDate: inputStartDate.value,
+         devolutionDate: inputDevolutionDate.value,
+         status: "created",
       };
 
       try {
-         const response = await fetch(`${urlMessageRequest}/Message/save`, {
-            method: "POST",
-            body: JSON.stringify(dataToSend),
-            headers: { "Content-type": "application/json" },
-         });
+         const response = await fetch(
+            `${urlReservationRequest}/Reservation/save`,
+            {
+               method: "POST",
+               body: JSON.stringify(dataToSend),
+               headers: { "Content-type": "application/json" },
+            }
+         );
+         console.log(response);
 
          if (!response.ok) {
             throw new Error("Error with post");
@@ -47,20 +56,24 @@ async function createMessage() {
    }
 }
 
-async function updateMessage(filaEditada, id) {
+async function updateReservation(filaEditada, id) {
    const dataToSend = {
-      idMessage: id,
-      messageText: filaEditada[0].innerText,
+      idReservation: id,
+      status: filaEditada[3].innerText,
+      startDate: filaEditada[4].innerText,
+      devolutionDate: filaEditada[5].innerText,
    };
 
-   console.log(dataToSend);
 
    try {
-      const response = await fetch(`${urlMessageRequest}/Message/update`, {
-         method: "PUT",
-         body: JSON.stringify(dataToSend),
-         headers: { "Content-type": "application/json" },
-      });
+      const response = await fetch(
+         `${urlReservationRequest}/Reservation/update`,
+         {
+            method: "PUT",
+            body: JSON.stringify(dataToSend),
+            headers: { "Content-type": "application/json" },
+         }
+      );
 
       if (!response.ok) {
          throw new Error("Error with put...:" + response.statusText);
@@ -72,24 +85,26 @@ async function updateMessage(filaEditada, id) {
    }
 }
 
-async function deleteMessage() {
+async function deleteReservation() {
    const rowSelected = Array.from(tableBody.children).find((row) => {
       return row.dataset.rowIsSelected === "true";
    });
 
    if (!rowSelected) {
-      alert("Please select a message to delete");
+      alert("Please select a reservation to delete");
       return;
    }
 
    const id = rowSelected.dataset.id;
-   console.log(id);
 
    try {
-      const response = await fetch(`${urlMessageRequest}/Message/${id}`, {
-         method: "DELETE",
-         body: null,
-      });
+      const response = await fetch(
+         `${urlReservationRequest}/Reservation/${id}`,
+         {
+            method: "DELETE",
+            body: null,
+         }
+      );
 
       if (!response.ok) {
          throw new Error("Error with delete...");
@@ -101,15 +116,20 @@ async function deleteMessage() {
    }
 }
 
-readMessage();
+readReservation();
 
 const llenarTabla = (data) => {
    if (data) {
       data.forEach((item) => {
          const newRow = `
-          <tr class="tr_table" data-id=${item.idMessage} >
-            <td>${item.messageText}</td>
+          <tr class="tr_table" data-id=${item.idReservation} >
+
+            <td>${item.idReservation}</td>
             <td>-- ortopedic name --</td>
+            <td>-- client_id --</td>
+            <td>${item.status}</td>
+            <td>${item.startDate}</td>
+            <td>${item.devolutionDate}</td>
           </tr>
          `;
 
@@ -157,14 +177,15 @@ const habilitarEdicionTabla = (event) => {
    });
 
    if (!rowSelected) {
-      alert("Please select a message to edit");
+      alert("Please select a reservation to edit");
       return;
    }
 
    if (event.target.dataset.type === "edit") {
       Array.from(rowSelected.children).forEach((elem, index) => {
-         if (index !== 1) elem.setAttribute("contenteditable", "");
-         if (index === 0) elem.focus();
+         if (index !== 0 && index !== 1 && index !== 2)
+            elem.setAttribute("contenteditable", "");
+         if (index === 3) elem.focus();
       });
 
       btnEdit.innerText = "Save";
@@ -174,19 +195,19 @@ const habilitarEdicionTabla = (event) => {
 
    const rowEditedId = parseInt(rowSelected.dataset.id);
 
-   updateMessage(Array.from(rowSelected.children), rowEditedId);
+   updateReservation(Array.from(rowSelected.children), rowEditedId);
 };
 
 // Event listeners **************************************************
 
 btnCreate.addEventListener("click", (event) => {
    event.preventDefault();
-   createMessage();
+   createReservation();
 });
 
 btnEdit.addEventListener("click", habilitarEdicionTabla);
 
-btnDelete.addEventListener("click", deleteMessage);
+btnDelete.addEventListener("click", deleteReservation);
 
 tableBody.addEventListener("click", effectsOnRows);
 tableBody.addEventListener("mouseover", effectsOnRows);
