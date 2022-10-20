@@ -49,7 +49,7 @@ body {
 
 section {
    min-width: 85rem;
-   max-width: 105rem;
+   max-width: 125rem;
    height: 55rem;
    margin: 3rem auto;
    padding: 2rem;
@@ -89,15 +89,22 @@ section {
 }
 
 .table thead tr {
+   height: auto;
    background-color: rgb(202, 202, 202);
    text-align: center;
+   display: grid;
+   grid-template-columns: 5% 20% 20% 15% 20% 20%;
 }
 
 .table th,
 .table td {
-   height: 2rem;
    padding: 0.5rem 1rem;
    border: 1px solid #999;
+}
+
+.table tbody tr {
+   display: grid;
+   grid-template-columns: 5% 20% 20% 15% 20% 20%;
 }
 
 .table td {

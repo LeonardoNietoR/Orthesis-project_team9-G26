@@ -224,6 +224,11 @@ button:focus {
    display: none;
 }
 
+.message_category-no-specified {
+   color: #888;
+   font-style: italic;
+}
+
 /* Menu  ******************************************* */
 
 .container_menu {

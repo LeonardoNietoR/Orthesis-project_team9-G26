@@ -12,10 +12,10 @@ const btnEditOrtopedic = document.getElementById("btnEditOrtopedic");
 const btnDeleteOrtopedic = document.getElementById("btnDeleteOrtopedic");
 const btnCloseDetails = document.getElementById("btnCancelOrtopedic");
 const titleNameDetail = document.getElementById("title_name-detail");
+const containerDetails = document.querySelector(".container_details");
 const inputOrthesisDescription = document.getElementById(
    "orthesis_description"
 );
-const containerDetails = document.querySelector(".container_details");
 
 const urlOrthesisRequest = "http://localhost:8080/api";
 
@@ -153,7 +153,9 @@ const llenarTablaDetailsOrtopedic = (data) => {
          if (index === 3) el.innerHTML = data.year;
          if (index === 4) el.innerHTML = data.description;
          if (index === 5)
-            el.innerHTML = data.category ? data.category.name : "not specified";
+            el.innerHTML = data.category
+               ? data.category.name
+               : '<span class="message_category-no-specified">not specified</span>';
       });
 
       titleNameDetail.innerText = `"${data.name}"`;
