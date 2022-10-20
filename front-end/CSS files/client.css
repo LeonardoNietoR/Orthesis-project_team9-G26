@@ -54,7 +54,7 @@ section {
    margin: 3rem auto;
    padding: 2rem;
    display: grid;
-   grid-template-columns: 60% 40%;
+   grid-template-columns: 65% 35%;
    grid-template-rows: 65% 35%;
    border: 1px solid #ccc;
 }
@@ -64,7 +64,6 @@ section {
    height: 51rem;
    border: 1px solid #999;
    margin-right: 2rem;
-   /* background-color: aquamarine; */
 }
 
 .container_table h2 {
@@ -91,13 +90,14 @@ section {
 .table thead tr {
    background-color: rgb(202, 202, 202);
    text-align: center;
+   display: grid;
+   grid-template-columns: 35% 10% 55%;
 }
 
 .table th,
 .table td {
-   height: 2rem;
    padding: 0.5rem 1rem;
-   border: 1px solid #999;
+   border: 1px solid #bbb;
 }
 
 .table td {
@@ -107,6 +107,11 @@ section {
 
 #table_body {
    cursor: pointer;
+}
+
+#table_body tr {
+   display: grid;
+   grid-template-columns: 35% 10% 55%;
 }
 
 .container_table-buttons {

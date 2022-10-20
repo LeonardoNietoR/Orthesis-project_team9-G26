@@ -99,12 +99,7 @@ section {
 .table th,
 .table td {
    padding: 0.5rem 1rem;
-   border: 1px solid #999;
-}
-
-.table tbody tr {
-   display: grid;
-   grid-template-columns: 5% 20% 20% 15% 20% 20%;
+   border: 1px solid #bbb;
 }
 
 .table td {
@@ -114,6 +109,11 @@ section {
 
 #table_body {
    cursor: pointer;
+}
+
+#table_body tr {
+   display: grid;
+   grid-template-columns: 5% 20% 20% 15% 20% 20%;
 }
 
 .container_table-buttons {
@@ -142,7 +142,6 @@ section {
 .form {
    width: 28rem;
    padding: 1rem 1rem;
-   /* background-color: red; */
 }
 
 .form div {
@@ -160,7 +159,8 @@ section {
    text-align: right;
 }
 .form input,
-.form textarea {
+.form textarea,
+.form select {
    display: inline-block;
    width: 60%;
 }
