@@ -2,7 +2,8 @@ const btnCreate = document.getElementById("btnCreate");
 const btnEdit = document.getElementById("btnEdit");
 const btnDelete = document.getElementById("btnDelete");
 const tableBody = document.getElementById("table_body");
-const inputClientId = document.getElementById("reservation_client");
+const inputOrtopedics = document.getElementById("reservation_ortopedic");
+const inputClient = document.getElementById("reservation_client");
 const inputStartDate = document.getElementById("reservation_startDate");
 const inputDevolutionDate = document.getElementById(
    "reservation_devolutionDate"
@@ -18,7 +19,7 @@ async function readReservation() {
       const data = await response.json();
       console.log(data);
 
-      sessionStorage.setItem("dataClient", JSON.stringify(data));
+      // sessionStorage.setItem("dataReservation", JSON.stringify(data));
 
       llenarTabla(data);
    } catch (err) {
@@ -27,11 +28,22 @@ async function readReservation() {
 }
 
 async function createReservation() {
+   if (!inputOrtopedics.value) {
+      alert("Please select an ortopedic");
+      return;
+   }
+   if (!inputClient.value) {
+      alert("Please select a client");
+      return;
+   }
+
    if (inputStartDate.value !== "" && inputDevolutionDate.value !== "") {
       const dataToSend = {
          startDate: inputStartDate.value,
          devolutionDate: inputDevolutionDate.value,
          status: "created",
+         ortopedic: { id: parseInt(inputOrtopedics.value) },
+         client: { idClient: parseInt(inputClient.value) },
       };
 
       try {
@@ -43,7 +55,6 @@ async function createReservation() {
                headers: { "Content-type": "application/json" },
             }
          );
-         console.log(response);
 
          if (!response.ok) {
             throw new Error("Error with post");
@@ -63,7 +74,6 @@ async function updateReservation(filaEditada, id) {
       startDate: filaEditada[4].innerText,
       devolutionDate: filaEditada[5].innerText,
    };
-
 
    try {
       const response = await fetch(
@@ -116,7 +126,28 @@ async function deleteReservation() {
    }
 }
 
-readReservation();
+const llenarListaOptionsOfOrtopedics = () => {
+   const ortopedicList = JSON.parse(sessionStorage.getItem("dataOrtesis"));
+
+   if (ortopedicList) {
+      ortopedicList.forEach((ortopedic) => {
+         const html = `<option value="${ortopedic.id}">${ortopedic.name}</option>`;
+         inputOrtopedics.insertAdjacentHTML("beforeend", html);
+      });
+   }
+};
+
+const llenarListaOptionsOfClients = () => {
+   const clientList = JSON.parse(sessionStorage.getItem("dataClient"));
+   console.log(clientList);
+
+   if (clientList) {
+      clientList.forEach((client) => {
+         const html = `<option value="${client.idClient}">${client.name}</option>`;
+         inputClient.insertAdjacentHTML("beforeend", html);
+      });
+   }
+};
 
 const llenarTabla = (data) => {
    if (data) {
@@ -125,17 +156,21 @@ const llenarTabla = (data) => {
           <tr class="tr_table" data-id=${item.idReservation} >
 
             <td>${item.idReservation}</td>
-            <td>-- ortopedic name --</td>
-            <td>-- client_id --</td>
+            <td>${item.ortopedic.name}</td>
+            <td>${item.client.name}</td>
             <td>${item.status}</td>
-            <td>${item.startDate}</td>
-            <td>${item.devolutionDate}</td>
+            <td>${formatDateToDisplay(item.startDate)}</td>
+            <td>${formatDateToDisplay(item.devolutionDate)}</td>
           </tr>
          `;
 
          tableBody.insertAdjacentHTML("beforeend", newRow);
       });
    }
+};
+
+const formatDateToDisplay = (date) => {
+   return date.match(/(\d{4})[-](\d{2})[-](\d{2})/g);
 };
 
 const effectsOnRows = (event) => {
@@ -198,6 +233,9 @@ const habilitarEdicionTabla = (event) => {
    updateReservation(Array.from(rowSelected.children), rowEditedId);
 };
 
+readReservation();
+llenarListaOptionsOfOrtopedics();
+llenarListaOptionsOfClients();
 // Event listeners **************************************************
 
 btnCreate.addEventListener("click", (event) => {

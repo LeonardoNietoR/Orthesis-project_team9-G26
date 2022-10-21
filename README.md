@@ -1,9 +1,9 @@
-# Orthesis-App: Aplicación web para el alquiler de órtesis.
+# _Orthesis-App_: Aplicación web para el alquiler de órtesis.
 
 ## Detalles
 
-Front-end desarrollado en HTML, CSS y Javascript.
-API-Rest desarrollado en Java / Spring-boot.
-Base de datos SQL.
+Front-end desarrollado en HTML, CSS y Javascript.\
+API-Rest desarrollado en Java / Spring-boot.\
+Base de datos SQL.\
 
-![orthesis_project_img](./front-end/images/img%20proyecto%20ortesis%202.png)
+![orthesis_project_img](./front-end/images/images%20pr%20orthesis.png)

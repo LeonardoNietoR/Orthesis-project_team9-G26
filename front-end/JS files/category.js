@@ -26,9 +26,6 @@ async function readCategory() {
 }
 
 async function createCategory() {
-   console.log(inputCategoryName.value);
-   console.log(inputCategoryDescription.value);
-
    if (
       inputCategoryName.value !== "" &&
       inputCategoryDescription.value !== ""
@@ -116,10 +113,24 @@ readCategory();
 const llenarTablaCategory = (data) => {
    if (data) {
       data.forEach((item) => {
+         const listOrtopedics = document.createElement("ul");
+
+         if (item.ortopedics.length > 0) {
+            item.ortopedics.forEach((ortopedic) => {
+               const html = `<li>${ortopedic.name}</li>`;
+               listOrtopedics.insertAdjacentHTML("beforeend", html);
+            });
+         }
+
+         const ortopedicsColumnContent =
+            item.ortopedics.length > 0
+               ? `<ul class="list_ortopedics">${listOrtopedics.innerHTML}</ul>`
+               : '<span class="message_no-ortopedics">no ortopedics yet</span>';
+
          const newRow = `
           <tr class="tr_table" data-idcategory=${item.id} >
             <td>${item.name}</td>
-            <td>-- ortesis list --</td>
+            <td>${ortopedicsColumnContent}</td>
             <td>${item.description}</td>
           </tr>
          `;

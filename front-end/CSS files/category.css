@@ -49,12 +49,12 @@ body {
 
 section {
    min-width: 85rem;
-   max-width: 105rem;
+   max-width: 120rem;
    height: 55rem;
    margin: 3rem auto;
    padding: 2rem;
    display: grid;
-   grid-template-columns: 60% 40%;
+   grid-template-columns: 67% 33%;
    grid-template-rows: 65% 35%;
    border: 1px solid #ccc;
 }
@@ -97,7 +97,7 @@ section {
 .table td {
    height: 2rem;
    padding: 0.5rem 1rem;
-   border: 1px solid #999;
+   border: 1px solid #bbb;
 }
 
 .table td {
@@ -114,6 +114,15 @@ section {
    margin: 2rem auto 0 auto;
    display: flex;
    justify-content: space-between;
+}
+
+.list_ortopedics li {
+   list-style-type: none;
+}
+
+.message_no-ortopedics {
+   color: #888;
+   font-style: italic;
 }
 
 /*  form ******************************************* */
