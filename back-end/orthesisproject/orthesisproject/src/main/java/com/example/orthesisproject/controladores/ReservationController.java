@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.orthesisproject.entidades.Reservation;
+import com.example.orthesisproject.model.DTOs.CountClient;
+import com.example.orthesisproject.model.DTOs.CountStatus;
 import com.example.orthesisproject.servicios.ReservationService;
 
 
@@ -61,6 +63,22 @@ public class ReservationController {
         this.reservationService.deleteReservation(id);
         return new ResponseEntity<String>("Reservation deleted", HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping(path ="/report-clients")
+   public ResponseEntity<List<CountClient>> getReportCountCLient(){
+      return new ResponseEntity<List<CountClient>>(this.reservationService.getCLientsMoreReservations(), HttpStatus.OK);
+   }
+
+    @GetMapping(path ="/report-dates/{dateOne}/{dateTwo}")
+   public ResponseEntity<List<Reservation>> getReportReservationBetweenDates(@PathVariable("dateOne") String dateOne, @PathVariable("dateTwo") String dateTwo){
+      return new ResponseEntity<List<Reservation>>(this.reservationService.getReservationsBetweenDates(dateOne, dateTwo), HttpStatus.OK);
+   }
+
+  @GetMapping(path ="/report-status")
+   public ResponseEntity<CountStatus> getReportStatus(){
+      return new ResponseEntity<CountStatus>(this.reservationService.getReservationByStatus(), HttpStatus.OK);
+   }
+    
    
    
 }

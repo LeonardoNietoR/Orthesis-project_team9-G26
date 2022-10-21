@@ -24,7 +24,6 @@ import com.example.orthesisproject.servicios.ClientService;
 @Service
 @RestController
 @RequestMapping("/api/Client")
-// @CrossOrigin: Allows Ajax request from anywhere. Avoids CORS error. 
 @CrossOrigin(origins="*", methods = {
    RequestMethod.GET,
    RequestMethod.POST,

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+      <link rel="stylesheet" href="CSS files/homePage.css" />
+
+      <title>Proyecto orthesis</title>
+   </head>
+   <body>
+      <header>
+         <h1 id="uno">Orthesis App</h1>
+      </header>
+
+      <!-- ORTOPEDIC SECTION ********************************************************************************************************************************************************************** -->
+      <!-- Ortopedics list and form ------------------------------------ -->
+
+      <section class="ortopedics">
+         <div class="container_menu">
+            <ul>
+               <li>
+                  <div>
+                     <a href="HTML files/category.html">Categories</a>
+                     <!-- <a href="#">Categories</a> -->
+                  </div>
+               </li>
+               <li>
+                  <div>
+                     <a href="HTML files/client.html">Clients</a>
+                  </div>
+               </li>
+               <li>
+                  <div>
+                     <a href="HTML files/reservation.html">Reservations</a>
+                  </div>
+               </li>
+               <li>
+                  <div>
+                     <a href="HTML files/messages.html">Messages</a>
+                  </div>
+               </li>
+            </ul>
+         </div>
+         <div class="container_ortopedic-list">
+            <h2>Orthopedics</h2>
+            <ul id="ortopedic_list"></ul>
+         </div>
+         <div class="container_form container_form-ortopedic">
+            <h2>Create orthopedic</h2>
+            <form action="" class="form form_orthesis">
+               <!-- <div>
+                  <label for="orthesis_id">Id Ortopedic:</label>
+                  <input type="number" id="orthesis_id" name="orthesis_id" />
+               </div> -->
+               <div>
+                  <label for="orthesis_name">Name:</label>
+                  <input type="text" id="orthesis_name" name="orthesis_name" />
+               </div>
+               <div>
+                  <label for="orthesis_brand">Brand:</label>
+                  <input
+                     type="text"
+                     id="orthesis_brand"
+                     name="orthesis_brand"
+                  />
+               </div>
+               <div>
+                  <label for="orthesis_year">Year:</label>
+                  <input
+                     type="number"
+                     maxlength="4"
+                     id="orthesis_year"
+                     name="orthesis_year"
+                  />
+               </div>
+               <div>
+                  <label for="orthesis_description">Description:</label>
+                  <textarea
+                     name="orthesis_description"
+                     id="orthesis_description"
+                     cols="30"
+                     rows="3"
+                  ></textarea>
+               </div>
+               <div>
+                  <label for="orthesis_category">Category:</label>
+
+                  <select name="" id="orthesis_category">
+                     <option disabled selected value="">
+                        -- select a category --
+                     </option>
+                     <!-- <option value="op1">option 1</option>
+                     <option value="op2">option 2</option> -->
+                  </select>
+               </div>
+               <button id="btnCreateOrthesis" type="submit">
+                  Create orthopedic
+               </button>
+            </form>
+         </div>
+
+         <div class="container_details hide">
+            <div class="container_header-details">
+               <h2>Details of <span id="title_name-detail"></span></h2>
+            </div>
+            <div class="container_content-details">
+               <table class="table_details">
+                  <thead>
+                     <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Brand</th>
+                        <th>Year</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr id="table_details-row">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                     </tr>
+                  </tbody>
+               </table>
+               <div class="container_buttons-details">
+                  <button id="btnEditOrtopedic" type="button" data-type="edit">
+                     Edit
+                  </button>
+                  <button id="btnDeleteOrtopedic" type="button">Delete</button>
+                  <button id="btnCancelOrtopedic" type="button">Cancel</button>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <script type="text/javascript" src="JS files/ortopedics.js"></script>
+   </body>
+</html>

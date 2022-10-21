@@ -21,20 +21,21 @@ public class Client implements Serializable{
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Integer idClient;
 
-   @Column(name="name")
-   private String name;
    @Column(name="email")
    private String email;
-   @Column(name="age")
-   private Integer age;
    @Column(name="password")
    private String password;
+   @Column(name="name")
+   private String name;
+   @Column(name="age")
+   private Integer age;
+   
 
-   @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "client")
+   @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "client")
    @JsonIgnoreProperties("client")
    private List<Message> messages;
 
-   @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "client")
+   @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "client")
    @JsonIgnoreProperties("client")
    private List<Reservation> reservations;
 
@@ -124,6 +125,14 @@ public class Client implements Serializable{
 
    public void setPassword(String password) {
       this.password = password;
+   }
+
+
+
+   @Override
+   public String toString() {
+      return "Client [idClient=" + idClient + ", email=" + email + ", password=" + password + ", name=" + name
+            + ", age=" + age + ", messages=" + messages + ", reservations=" + reservations + "]";
    }
 
 

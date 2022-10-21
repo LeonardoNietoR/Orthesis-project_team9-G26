@@ -28,10 +28,7 @@ public class Reservation implements Serializable {
    @Column(name="devolutionDate")
    private Date devolutionDate;
 
-   @Column(name="score")
-   private Integer score;
-
-   @Column(name="status")
+    @Column(name="status")
    private String status;
 
    @ManyToOne
@@ -43,6 +40,9 @@ public class Reservation implements Serializable {
    @JoinColumn(name="clientId")
    @JsonIgnoreProperties({"reservations", "messages"})
    private Client client;
+
+    @Column(name="score")
+   private Integer score;
 
   
 
@@ -109,3 +109,7 @@ public class Reservation implements Serializable {
    
    
 }
+
+
+
+

@@ -8,4 +8,5 @@ import com.example.orthesisproject.entidades.Category;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
    
+   
 }
