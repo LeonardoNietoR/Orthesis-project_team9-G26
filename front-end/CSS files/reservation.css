@@ -63,8 +63,7 @@ section {
 .container_table {
    height: 51rem;
    border: 1px solid #999;
-   margin-right: 2rem;
-   /* background-color: aquamarine; */
+   margin-right: 1rem;
 }
 
 .container_table h2 {
@@ -133,6 +132,7 @@ section {
    justify-content: center;
    align-items: center;
    overflow: hidden;
+   /* background-color: green; */
 }
 
 .container_form h2 {
@@ -140,29 +140,33 @@ section {
 }
 
 .form {
-   width: 28rem;
-   padding: 1rem 1rem;
+   width: 33rem;
+   padding: 1rem 0;
 }
 
 .form div {
    width: 100%;
    height: auto;
    display: flex;
-   margin-bottom: 0.6rem;
+   margin-bottom: 1rem;
+   padding-right: 2.5rem;
    justify-content: space-between;
 }
 
 .form label {
    display: inline-block;
-   width: 35%;
+   width: 50%;
    height: auto;
    text-align: right;
+   margin-right: 0.2rem;
 }
 .form input,
 .form textarea,
 .form select {
+   height: 2.5rem;
    display: inline-block;
-   width: 60%;
+   width: 50%;
+   text-align: center;
 }
 
 button {

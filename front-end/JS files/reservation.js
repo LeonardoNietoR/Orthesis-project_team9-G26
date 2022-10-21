@@ -150,8 +150,6 @@ const llenarListaOptionsOfClients = () => {
 };
 
 const llenarTabla = (data) => {
-   console.log(data);
-
    if (data) {
       data.forEach((item) => {
          const newRow = `
@@ -161,14 +159,18 @@ const llenarTabla = (data) => {
             <td>${item.ortopedic.name}</td>
             <td>${item.client.name}</td>
             <td>${item.status}</td>
-            <td>${item.startDate}</td>
-            <td>${item.devolutionDate}</td>
+            <td>${formatDateToDisplay(item.startDate)}</td>
+            <td>${formatDateToDisplay(item.devolutionDate)}</td>
           </tr>
          `;
 
          tableBody.insertAdjacentHTML("beforeend", newRow);
       });
    }
+};
+
+const formatDateToDisplay = (date) => {
+   return date.match(/(\d{4})[-](\d{2})[-](\d{2})/g);
 };
 
 const effectsOnRows = (event) => {
