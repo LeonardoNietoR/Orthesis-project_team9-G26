@@ -40,7 +40,7 @@ public class Ortopedic implements Serializable{
    @JsonIgnoreProperties("ortopedics")
    private Category category;
 
-   @OneToMany(cascade ={CascadeType.PERSIST}, mappedBy = "ortopedic")  
+   @OneToMany(cascade ={CascadeType.ALL}, mappedBy = "ortopedic")  
    @JsonIgnoreProperties({"ortopedic","client"})
    private List<Message> messages;
 

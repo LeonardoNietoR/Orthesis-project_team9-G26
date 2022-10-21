@@ -78,13 +78,13 @@ section {
    height: 35rem;
    margin: 0 auto;
    border: 1px solid #999;
-   overflow: hidden;
+   overflow: auto;
 }
 
 .table {
    width: 100%;
    border-collapse: collapse;
-   overflow: auto;
+   overflow: hidden;
 }
 
 .table thead tr {

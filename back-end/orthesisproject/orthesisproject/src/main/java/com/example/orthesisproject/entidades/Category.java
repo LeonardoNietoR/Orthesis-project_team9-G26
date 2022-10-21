@@ -27,7 +27,7 @@ public class Category implements Serializable {
    @Column(name="description")
    private String description;
 
-   @OneToMany(cascade={CascadeType.PERSIST}, mappedBy="category")
+   @OneToMany(cascade={CascadeType.ALL}, mappedBy="category")
    @JsonIgnoreProperties("category")
    private List<Ortopedic> ortopedics;
 
